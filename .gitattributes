@@ -1,0 +1,7 @@
+# Disable delta compression for video/audio - saves massive memory during push
+*.mp4 -delta
+*.m4a -delta
+*.jpg -delta
+*.jpeg -delta
+*.png -delta
+*.webp -delta

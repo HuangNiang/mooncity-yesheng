@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>月亮城 — 燕云十六声 · 百业</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&display=swap');
+
+/* ============================================================
+   VARIABLES — 暗夜水墨色系
+   ============================================================ */
+:root {
+  --bg-deep:      #08080f;
+  --bg-dark:      #0d0d18;
+  --bg-card:      rgba(17,17,24,.5);
+  --bg-card2:     rgba(23,23,34,.45);
+  --ink:          #e8e4dc;
+  --ink-body:     #b8b4aa;
+  --ink-dim:      #706c64;
+  --ink-faint:    #504c45;
+  --vermillion:   #c04842;
+  --vermillion-l: #d46862;
+  --gold:         #b8944a;
+  --gold-light:   #d4c088;
+  --jade:         #6a8a78;
+  --jade-light:   #8aaa98;
+  --surface:      rgba(17,17,24,.4);
+  --surface-hover: rgba(22,22,32,.45);
+  --border:       rgba(255,255,255,.06);
+  --border-active: rgba(192,72,66,.3);
+  --shadow-sm:    0 4px 20px rgba(0,0,0,.25),0 1px 4px rgba(0,0,0,.2);
+  --shadow-md:    0 12px 48px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2);
+  --shadow-lg:    0 24px 80px rgba(0,0,0,.45),0 4px 16px rgba(0,0,0,.25);
+  --highlight-edge: 0 1px 0 rgba(255,255,255,.03) inset;
+  --depth-raise:  0 6px 24px rgba(0,0,0,.3),0 1px 3px rgba(0,0,0,.15),0 1px 0 rgba(255,255,255,.02) inset;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans SC',sans-serif;
+  background:transparent;
+  color:var(--ink-body);
+  line-height:1.8;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse at 20% 5%, rgba(192,72,66,.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 90%, rgba(106,138,120,.03) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(180,148,74,.02) 0%, transparent 70%);
+  background-attachment:fixed;
+}
+/* Splash screen */
+.splash{position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease-out}
+.splash.fade-out{opacity:0;pointer-events:none}
+.splash video{width:100%;height:100%;object-fit:cover}
+.splash .skip-btn{
+  position:absolute;top:2rem;right:2rem;z-index:10;
+  padding:.5rem 1.4rem;border-radius:20px;
+  background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.8);font-size:.82rem;cursor:pointer;
+  font-family:inherit;letter-spacing:.05em;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:all .3s;
+}
+.splash .skip-btn:hover{background:rgba(0,0,0,.65);border-color:rgba(255,255,255,.4);color:#fff}
+.splash .sound-btn{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:10;
+  padding:.6rem 1.6rem;border-radius:24px;
+  background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.85);font-size:.85rem;cursor:pointer;
+  font-family:inherit;letter-spacing:.05em;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:all .3s;display:flex;align-items:center;gap:.4rem;
+}
+.splash .sound-btn:hover{background:rgba(0,0,0,.65);border-color:rgba(255,255,255,.4);color:#fff}
+.splash .sound-btn.on{color:var(--gold-light);border-color:rgba(184,148,74,.4)}
+
+.bg-video{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg-video video{width:100%;height:100%;object-fit:cover}
+.bg-video-mask{position:absolute;inset:0;background:var(--bg-deep);opacity:.7}
+::selection{background:rgba(192,72,66,.15);color:var(--ink)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg-dark)}
+::-webkit-scrollbar-thumb{background:rgba(180,148,74,.15);border-radius:3px}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.section-label{
+  font-size:.7rem;color:var(--gold);letter-spacing:.4em;
+  text-transform:uppercase;margin-bottom:.4rem;font-weight:500;
+}
+.section-title{
+  font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:700;
+  color:var(--ink);letter-spacing:.08em;
+}
+.section-divider{
+  width:40px;height:2px;margin:.8rem auto 0;
+  background:linear-gradient(90deg,transparent,var(--vermillion),var(--gold),transparent);
+  opacity:.6;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  padding:1rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:all .4s;
+  background:rgba(8,8,15,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+nav.scrolled{
+  background:rgba(8,8,15,.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  padding:.7rem 2.5rem;
+}
+nav .logo{
+  display:flex;align-items:center;text-decoration:none;
+}
+nav .logo img{height:32px;width:auto;display:block}
+nav .nav-links{display:flex;gap:1.8rem;list-style:none}
+nav .nav-links a{
+  color:var(--ink-dim);text-decoration:none;font-size:.8rem;
+  letter-spacing:.08em;transition:color .35s;font-weight:400;
+}
+nav .nav-links a:hover{color:var(--gold)}
+
+/* ============================================================
+   HERO — 无月暗夜水墨
+   ============================================================ */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:2rem;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(192,72,66,.05) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 60%, rgba(180,148,74,.04) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(8,8,15,.75) 0%, rgba(8,8,15,.45) 40%, var(--bg-deep) 100%);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url('assets/images/hero-bg.jpg') center/cover no-repeat;
+  opacity:.1;
+  z-index:-1;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:40%;
+  background:
+    linear-gradient(195deg, transparent 40%, rgba(8,8,15,.55) 41%, rgba(8,8,15,.7) 50%, transparent 51%),
+    linear-gradient(168deg, transparent 46%, rgba(8,8,15,.6) 47%, rgba(8,8,15,.8) 58%, transparent 59%),
+    linear-gradient(180deg, transparent 50%, rgba(8,8,15,.5) 55%, var(--bg-deep) 100%);
+  pointer-events:none;z-index:0;
+}
+
+.hero-content{position:relative;z-index:1}
+
+.hero h1{
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(3.5rem,8vw,6rem);font-weight:900;
+  background:linear-gradient(180deg,var(--ink) 10%,var(--gold-light) 55%,var(--vermillion) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:.18em;
+  filter:drop-shadow(0 0 30px rgba(192,72,66,.12));
+}
+.hero .subtitle{
+  margin-top:.5rem;font-size:.95rem;
+  color:var(--gold);letter-spacing:.45em;font-weight:300;
+}
+.hero .divider{
+  display:flex;align-items:center;gap:.8rem;margin:1.8rem auto;width:220px;
+}
+.hero .divider .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--vermillion),transparent)}
+.hero .divider .dot{width:4px;height:4px;background:var(--vermillion);border-radius:50%;opacity:.55}
+.hero .slogan{
+  font-family:'Noto Serif SC',serif;
+  font-size:1rem;color:var(--ink-dim);line-height:2.2;letter-spacing:.1em;
+}
+.hero .tags{
+  display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:2rem;
+}
+.hero .tags span{
+  font-size:.72rem;padding:.3em 1.2em;
+  border:1px solid rgba(200,162,88,.12);color:var(--gold-light);
+  border-radius:2px;letter-spacing:.12em;
+}
+.hero .tags span:nth-child(even){border-color:rgba(192,72,66,.2);color:var(--vermillion-l)}
+
+.scroll-hint{
+  position:absolute;bottom:2.5rem;z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  animation:floatHint 2.2s ease-in-out infinite;
+}
+.scroll-hint span{font-size:.68rem;color:var(--ink-faint);letter-spacing:.2em}
+.scroll-hint .mouse{
+  width:18px;height:28px;border:1.5px solid rgba(200,162,88,.25);border-radius:9px;position:relative;
+}
+.scroll-hint .mouse::after{
+  content:'';position:absolute;top:5px;left:50%;transform:translateX(-50%);
+  width:2px;height:6px;background:var(--vermillion);border-radius:1px;
+  animation:scrollWheel 1.8s ease-in-out infinite;
+}
+@keyframes floatHint{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes scrollWheel{0%{opacity:1;top:5px}100%{opacity:0;top:16px}}
+
+/* ============================================================
+   SECTION COMMONS
+   ============================================================ */
+.section-wrap{position:relative;z-index:1;perspective:1000px}
+section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
+.section-header{text-align:center;margin-bottom:3rem}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+#about .about-text h3{
+  font-family:'Noto Serif SC',serif;color:var(--gold);font-size:1.2rem;margin-bottom:1rem;
+}
+#about .about-text p{color:var(--ink-body);line-height:2.1;font-size:.9rem;margin-bottom:.8rem}
+#about .about-text .highlight{color:var(--gold-light);font-weight:500}
+
+#about .about-visual{
+  background:var(--bg-card);border:1px solid rgba(192,72,66,.06);
+  border-radius:6px;padding:2rem;text-align:center;position:relative;overflow:hidden;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+#about .about-visual::before{
+  content:'';position:absolute;inset:0;
+  background:url('assets/images/kaifeng-palace.jpg') center/cover no-repeat;
+  opacity:.1;
+}
+#about .stats-row{display:flex;justify-content:center;gap:3rem;margin-top:2.5rem;flex-wrap:wrap}
+#about .stat-item{text-align:center}
+#about .stat-item .num{
+  font-family:'Noto Serif SC',serif;font-size:1.6rem;font-weight:700;color:var(--gold-light);
+}
+#about .stat-item .lbl{font-size:.75rem;color:var(--ink-dim);margin-top:.2rem;letter-spacing:.1em}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+.tabs-nav{display:flex;justify-content:center;gap:.4rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.tabs-nav button{
+  font-family:'Noto Sans SC',sans-serif;
+  padding:.45em 1.3em;font-size:.78rem;
+  background:rgba(17,17,24,.45);border:1px solid var(--border);color:var(--ink-dim);
+  border-radius:2px;cursor:pointer;transition:all .35s;letter-spacing:.06em;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.tabs-nav button:hover{color:var(--gold);border-color:rgba(200,162,88,.2)}
+.tabs-nav button.active{
+  color:var(--vermillion);border-color:var(--border-active);
+  background:rgba(192,72,66,.05);
+}
+.tab-panel{display:none;animation:tabIn .45s cubic-bezier(.34,1.56,.64,1)}
+.tab-panel.active{display:block}
+@keyframes tabIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============================================================
+   SYSTEM
+   ============================================================ */
+.sys-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+.sys-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:6px;padding:1.8rem 1.5rem;transition:all .4s;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.sys-card:hover{
+  background:var(--bg-card2);border-color:var(--border-active);
+  transform:translateY(-2px) scale(1.02);box-shadow:var(--shadow-md);
+}
+.sys-card .icon-circle{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(192,72,66,.04);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:var(--vermillion);margin-bottom:1rem;
+}
+.sys-card h4{font-family:'Noto Serif SC',serif;color:var(--ink);font-size:.95rem;margin-bottom:.5rem}
+.sys-card p{font-size:.8rem;color:var(--ink-dim);line-height:1.8}
+
+/* ============================================================
+   MARTIAL ARTS
+   ============================================================ */
+.martial-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.4rem}
+.martial-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:6px;padding:1.8rem;transition:all .4s;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.martial-card:hover{
+  background:var(--bg-card2);border-color:var(--border-active);
+  transform:translateY(-3px) scale(1.02);box-shadow:var(--shadow-md);
+}
+.martial-card .card-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.martial-card .card-top .elem-icon{
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(192,72,66,.04);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--vermillion);
+}
+.martial-card .card-top .info h4{font-family:'Noto Serif SC',serif;color:var(--ink);font-size:1rem}
+.martial-card .card-top .info .en{font-size:.7rem;color:var(--ink-faint);letter-spacing:.08em}
+.martial-card .card-body .row{display:flex;margin-bottom:.3rem;font-size:.8rem}
+.martial-card .card-body .row .key{color:var(--ink-faint);width:48px;flex-shrink:0}
+.martial-card .card-body .row .val{color:var(--ink-body)}
+.martial-card .card-body .desc{font-size:.8rem;color:var(--ink-dim);margin-top:.6rem;line-height:1.8}
+.martial-card .difficulty{display:flex;gap:2px;margin-top:.5rem}
+.martial-card .difficulty .star{color:var(--gold);font-size:.6rem}
+.martial-card .difficulty .star.off{color:rgba(180,148,74,.1)}
+.martial-card .tag-row{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.5rem}
+.martial-card .tag-row .tag{
+  font-size:.64rem;padding:.15em .65em;
+  border:1px solid var(--border);border-radius:2px;color:var(--ink-dim);
+}
+
+/* ============================================================
+   FACTIONS
+   ============================================================ */
+.faction-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.9rem}
+.faction-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:6px;padding:1.5rem 1rem;text-align:center;
+  transition:all .4s;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.faction-card:hover{
+  background:var(--bg-card2);border-color:var(--border-active);
+  transform:translateY(-3px) scale(1.03);box-shadow:var(--shadow-sm);
+}
+.faction-card .f-icon{
+  width:50px;height:50px;border-radius:50%;margin:0 auto .7rem;
+  background:rgba(200,162,88,.04);border:1px solid rgba(200,162,88,.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:var(--vermillion);overflow:hidden;
+}
+.faction-card .f-icon img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.faction-card.has-img .f-icon{width:54px;height:54px;background:transparent}
+.faction-card .f-name{color:var(--ink);font-family:'Noto Serif SC',serif;font-size:.95rem;font-weight:600}
+.faction-card .f-role{font-size:.7rem;color:var(--gold);margin-top:.25rem;letter-spacing:.08em}
+.faction-card .f-weapon{font-size:.72rem;color:var(--ink-dim);margin-top:.3rem}
+
+/* ============================================================
+   3D DEPTH ENHANCEMENTS — all interactive cards
+   ============================================================ */
+.sys-card, .martial-card, .faction-card, .activity-card, .platform-card, .member-card, #join .join-card, .video-card{
+  box-shadow:var(--depth-raise);
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s,border-color .4s,background .4s;
+}
+.sys-card:hover, .martial-card:hover, .activity-card:hover, .platform-card:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:var(--shadow-lg),0 0 0 1px rgba(255,255,255,.03) inset;
+}
+.faction-card:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:var(--shadow-lg),0 0 0 1px rgba(255,255,255,.03) inset;
+}
+.member-card:hover{
+  box-shadow:var(--shadow-lg),0 0 40px rgba(192,72,66,.08),0 1px 0 rgba(255,255,255,.02) inset !important;
+}
+#join .join-card:hover{
+  box-shadow:var(--shadow-lg),0 0 0 1px rgba(255,255,255,.03) inset;
+}
+
+/* Icon circles — 3D embossed */
+.icon-circle, .elem-icon, .f-icon, .a-icon-circle{
+  box-shadow:0 2px 8px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,.03) inset,0 1px 3px rgba(0,0,0,.2) inset;
+  background:linear-gradient(135deg,rgba(192,72,66,.08) 0%,rgba(192,72,66,.02) 100%);
+  transition:all .4s;
+}
+.sys-card:hover .icon-circle,
+.martial-card:hover .elem-icon,
+.faction-card:hover .f-icon,
+.activity-card:hover .a-icon-circle,
+.platform-card:hover .icon-circle{
+  box-shadow:0 4px 16px rgba(192,72,66,.12),0 1px 0 rgba(255,255,255,.05) inset;
+  transform:translateY(-2px);
+}
+
+/* Tags & badges */
+.tag, .req-badge, .role-tag{
+  box-shadow:0 1px 3px rgba(0,0,0,.2),0 1px 0 rgba(255,255,255,.02) inset;
+  transition:all .3s;
+}
+.tag:hover, .req-badge:hover{
+  transform:translateY(-1px);
+  box-shadow:0 3px 8px rgba(0,0,0,.3);
+}
+
+/* Tabs nav buttons */
+.tabs-nav button{
+  box-shadow:0 2px 6px rgba(0,0,0,.2),0 1px 0 rgba(255,255,255,.02) inset;
+  transition:all .35s;
+}
+.tabs-nav button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 16px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,.03) inset;
+}
+.tabs-nav button.active{
+  box-shadow:0 2px 12px rgba(192,72,66,.1),0 1px 0 rgba(255,255,255,.02) inset;
+}
+
+/* Carousel buttons */
+.carousel-btn{
+  box-shadow:0 4px 16px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.04) inset;
+  transition:all .3s;
+}
+.carousel-btn:hover{
+  transform:translateY(-50%) scale(1.08);
+  box-shadow:0 6px 24px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.06) inset;
+}
+
+/* Carousel dots */
+.carousel-dots button{
+  box-shadow:0 1px 3px rgba(0,0,0,.3);
+  transition:all .3s;
+}
+.carousel-dots button.active{
+  box-shadow:0 0 12px rgba(192,72,66,.3),0 2px 4px rgba(0,0,0,.3);
+}
+
+/* Back-to-top & music toggle */
+.back-top, .music-toggle{
+  box-shadow:0 4px 16px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.03) inset;
+}
+.back-top:hover, .music-toggle:hover{
+  box-shadow:0 6px 24px rgba(0,0,0,.45),0 1px 0 rgba(255,255,255,.05) inset;
+}
+
+/* Stats */
+.stat-item{
+  transition:transform .3s;
+}
+.stat-item:hover{
+  transform:translateY(-2px);
+}
+
+/* Nav links */
+.nav-links a{
+  transition:all .3s;
+}
+.nav-links a:hover{
+  text-shadow:0 0 20px rgba(192,72,66,.3);
+}
+
+
+
+/* Difficulty stars */
+.martial-card .difficulty .star{
+  filter:drop-shadow(0 1px 2px rgba(180,148,74,.3));
+}
+
+/* ============================================================
+   CAROUSEL (galleries)
+   ============================================================ */
+.carousel{position:relative;overflow:hidden;border-radius:6px}
+.carousel-track{display:flex;transition:transform .5s cubic-bezier(.25,.1,.25,1)}
+.carousel-slide{flex:0 0 100%;position:relative;aspect-ratio:16/10;overflow:hidden;cursor:pointer}
+.carousel-slide img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .5s;
+}
+.carousel-slide:hover img{transform:scale(1.04)}
+.carousel-slide .slide-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:2rem 1.2rem 1rem;
+  background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 100%);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  pointer-events:none;
+}
+.carousel-slide .slide-caption .s-name{color:#e8e4dc;font-size:.9rem;font-weight:500}
+.carousel-slide .slide-caption .s-desc{color:rgba(200,200,200,.6);font-size:.72rem;margin-top:.15rem}
+
+/* Video slides inside carousel */
+.carousel-slide.video-slide{
+  aspect-ratio:auto;cursor:default;background:var(--bg-card);
+  border-radius:6px;overflow:hidden;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.carousel-slide.video-slide:hover img{transform:none}
+.carousel-slide.video-slide.weapon .video-wrap{padding-bottom:72%}
+.carousel-slide.video-slide .video-info{padding:.9rem 1.1rem;background:var(--bg-card)}
+
+.carousel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.7);font-size:.9rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;z-index:5;
+}
+.carousel-btn:hover{background:rgba(0,0,0,.75);color:#fff;border-color:rgba(255,255,255,.2)}
+.carousel-btn.prev{left:12px}
+.carousel-btn.next{right:12px}
+.carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:1rem}
+.carousel-dots button{
+  width:6px;height:6px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.12);cursor:pointer;transition:all .3s;
+}
+.carousel-dots button.active{background:var(--vermillion);transform:scale(1.4)}
+
+
+/* Detail modal */
+.detail-modal{
+  position:fixed;inset:0;z-index:9998;
+  background:rgba(0,0,0,.88);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.detail-modal.open{display:flex}
+.detail-modal .dm-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:8px;padding:2.2rem;max-width:480px;width:90vw;
+  cursor:default;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 24px 80px rgba(0,0,0,.5);
+  animation:dmFadeIn .35s ease-out;
+}
+@keyframes dmFadeIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.detail-modal .dm-close{
+  position:absolute;top:1.2rem;right:1.2rem;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.6);font-size:1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
+}
+.detail-modal .dm-close:hover{background:rgba(255,255,255,.12);color:#fff}
+.detail-modal .dm-card .dm-icon{
+  width:52px;height:52px;border-radius:50%;margin:0 auto .8rem;
+  background:rgba(192,72,66,.06);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;color:var(--vermillion);
+}
+.detail-modal .dm-card .dm-name{
+  text-align:center;font-family:'Noto Serif SC',serif;color:var(--ink);
+  font-size:1.2rem;margin-bottom:.15rem;
+}
+.detail-modal .dm-card .dm-en{
+  text-align:center;font-size:.7rem;color:var(--ink-faint);letter-spacing:.08em;margin-bottom:1rem;
+}
+.detail-modal .dm-card .dm-row{display:flex;margin-bottom:.4rem;font-size:.82rem}
+.detail-modal .dm-card .dm-row .dm-key{color:var(--ink-faint);width:52px;flex-shrink:0}
+.detail-modal .dm-card .dm-row .dm-val{color:var(--ink-body)}
+.detail-modal .dm-card .dm-desc{font-size:.82rem;color:var(--ink-dim);margin-top:.8rem;line-height:2}
+.detail-modal .dm-card .dm-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.8rem;justify-content:center}
+.detail-modal .dm-card .dm-tags .dm-tag{
+  font-size:.66rem;padding:.2em .7em;
+  border:1px solid var(--border);border-radius:2px;color:var(--ink-dim);
+}
+.detail-modal .dm-card .dm-stars{display:flex;justify-content:center;gap:3px;margin:.6rem 0}
+.detail-modal .dm-card .dm-stars .star{color:var(--gold);font-size:.65rem}
+.detail-modal .dm-card .dm-stars .star.off{color:rgba(180,148,74,.12)}
+.detail-modal .dm-card .dm-role{text-align:center;font-size:.78rem;color:var(--gold);margin-bottom:.3rem}
+.detail-modal .dm-card .dm-weapon{text-align:center;font-size:.78rem;color:var(--ink-dim);margin-bottom:.8rem}
+
+/* Click hint */
+.click-hint{
+  text-align:center;font-size:.62rem;color:var(--ink-faint);margin-top:.6rem;
+  opacity:0;transition:opacity .3s;
+  letter-spacing:.08em;
+}
+.martial-card:hover .click-hint,
+.faction-card:hover .click-hint{opacity:1}
+
+/* Martial card compact mode */
+.martial-card .card-body .row,
+.martial-card .card-body .desc{display:none}
+.martial-card .tag-row{justify-content:center}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.92);backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:4px;box-shadow:0 20px 80px rgba(0,0,0,.6)}
+.lightbox .lb-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.7);font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;z-index:1;
+}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.12);color:#fff}
+.lightbox .lb-prev,.lightbox .lb-next{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.7);font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
+}
+.lightbox .lb-prev:hover,.lightbox .lb-next:hover{background:rgba(255,255,255,.12);color:#fff}
+.lightbox .lb-prev{left:1.5rem}
+.lightbox .lb-next{right:1.5rem}
+
+/* ============================================================
+   VIDEOS
+   ============================================================ */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.2rem}
+.video-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:6px;overflow:hidden;transition:all .4s;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.video-card:hover{border-color:var(--border-active);box-shadow:var(--shadow-sm);transform:scale(1.01)}
+.video-wrap{
+  position:relative;padding-bottom:56.25%;height:0;overflow:hidden;
+  background:#000;cursor:pointer;
+}
+.video-wrap iframe,.video-wrap video{
+  position:absolute;top:0;left:0;width:100%;height:100%;border:0;object-fit:cover;
+}
+/* Play button overlay */
+.video-wrap .play-btn{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;
+}
+.video-wrap .play-btn::after{
+  content:'';width:56px;height:56px;border-radius:50%;
+  background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.4);
+  transition:all .3s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolygon points='8,5 19,12 8,19' fill='rgba(255,255,255,.8)'/%3E%3C/svg%3E");
+  background-size:24px;background-position:55% 50%;background-repeat:no-repeat;
+}
+.video-card:hover .play-btn::after,
+.carousel-slide.video-slide:hover .play-btn::after{transform:scale(1.08);background-color:rgba(0,0,0,.7);border-color:rgba(255,255,255,.6)}
+.video-wrap video.playing + .play-btn{display:none}
+.video-wrap video.playing + .play-btn::after{display:none}
+.video-info{padding:.9rem 1.1rem}
+.video-info .v-title{color:var(--ink);font-size:.88rem;font-weight:500}
+.video-info .v-desc{font-size:.72rem;color:var(--ink-dim);margin-top:.2rem}
+
+.weapon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.weapon-grid .video-wrap{padding-bottom:72%}
+
+/* ============================================================
+   ACTIVITIES
+   ============================================================ */
+.activity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem}
+.activity-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:6px;padding:1.8rem 1.4rem;text-align:center;transition:all .4s;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.activity-card:hover{
+  background:var(--bg-card2);border-color:var(--border-active);
+  transform:translateY(-4px) scale(1.02);box-shadow:var(--shadow-md);
+}
+.activity-card .a-icon-circle{
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(192,72,66,.04);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto .8rem;font-size:1.2rem;color:var(--vermillion);
+  transition:all .4s;
+}
+.activity-card:hover .a-icon-circle{background:rgba(192,72,66,.1);border-color:var(--border-active)}
+.activity-card h4{color:var(--ink);font-family:'Noto Serif SC',serif;font-size:.95rem;margin-bottom:.4rem}
+.activity-card p{font-size:.78rem;color:var(--ink-dim);line-height:1.8}
+
+/* ============================================================
+	   ROSTER
+	   ============================================================ */
+	.roster-inner{
+	  display:flex;align-items:flex-start;gap:1.5rem;
+	  max-width:1100px;margin:0 auto;padding:0 1.5rem;
+	}
+	.roster-art{
+	  flex:0 0 auto;width:100px;
+	  display:flex;flex-direction:column;align-items:center;gap:1rem;
+	  padding-top:1.5rem;position:sticky;top:120px;
+	}
+	.roster-art .art-line{
+	  width:1px;height:50px;
+	  background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+	  opacity:.45;
+	}
+	.roster-art .art-main{
+	  writing-mode:vertical-rl;
+	  font-family:'Ma Shan Zheng','Noto Serif SC',cursive;
+	  font-size:2.6rem;font-weight:400;
+	  color:transparent;
+	  background:linear-gradient(170deg,var(--gold-light) 0%,var(--gold) 40%,var(--vermillion-l) 100%);
+	  -webkit-background-clip:text;background-clip:text;
+	  letter-spacing:.5em;line-height:1.3;
+	  opacity:.72;
+	  filter:drop-shadow(0 0 18px rgba(184,148,74,.25));
+	}
+	.roster-art .art-sub{
+	  writing-mode:vertical-rl;
+	  font-family:'Noto Serif SC',serif;
+	  font-size:.82rem;font-weight:300;
+	  color:var(--ink-dim);
+	  letter-spacing:.3em;
+	  opacity:.45;
+	}
+	.roster-art .art-dot{
+	  width:4px;height:4px;border-radius:50%;
+	  background:var(--gold);opacity:.35;
+	}
+	.roster-grid{flex:1 1 auto;min-width:0;padding:1rem 0 2rem}
+.member-card{
+  width:52%;margin:0 auto;
+  border-radius:8px;
+  background:var(--bg-card);
+  border:1px solid rgba(255,255,255,.04);
+  box-shadow:var(--shadow-sm);
+  position:relative;
+  transform:translateX(-16.6667%) rotateX(var(--rx,0deg)) scale(var(--sc,1));
+  opacity:var(--op,1);
+  will-change:transform,opacity;
+  transition:box-shadow .5s,border-color .5s;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.member-card:not(:first-child){margin-top:-40px}
+.member-card:hover{
+  box-shadow:var(--shadow-lg),0 0 40px rgba(192,72,66,.1);
+  border-color:var(--border-active);
+  z-index:100 !important;
+  transform:translateX(-16.6667%) rotateX(0deg) scale(1.04) !important;
+}
+.member-card .video-wrap{
+  position:relative;aspect-ratio:2.55/1;overflow:hidden;
+  background:#000;border-radius:8px;
+}
+.member-card .video-wrap video{
+  position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;
+}
+.member-card .video-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:2.5rem 1.6rem 1.2rem;
+  background:linear-gradient(0deg,rgba(6,6,13,.92) 0%,transparent 100%);
+  display:flex;flex-direction:column;
+  align-items:center;text-align:center;
+  pointer-events:none;border-radius:0 0 8px 8px;
+}
+.member-card .role-tag{
+  display:inline-block;font-size:.64rem;padding:.2em .9em;
+  border:1px solid var(--gold);color:var(--gold);
+  border-radius:2px;letter-spacing:.18em;width:fit-content;margin-bottom:.4rem;
+}
+.member-card .m-name{
+  color:var(--ink);font-weight:700;font-size:1.15rem;
+  letter-spacing:.08em;font-family:'Noto Serif SC',serif;
+}
+.member-card .m-title{font-size:.74rem;color:var(--ink-dim);margin-top:.1rem}
+.member-card .m-motto{font-size:.7rem;color:var(--ink-faint);margin-top:.25rem;opacity:.6;line-height:1.6;max-width:340px}
+
+/* ============================================================
+   PLATFORM CARDS
+   ============================================================ */
+.platform-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:6px;padding:1.6rem;transition:all .4s;
+  text-decoration:none;display:block;cursor:pointer;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.platform-card:hover{background:var(--bg-card2);border-color:var(--border-active);transform:translateY(-2px) scale(1.02)}
+.platform-card .icon-circle{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(192,72,66,.04);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:var(--vermillion);margin-bottom:1rem;
+}
+.platform-card h4{color:var(--ink);font-family:'Noto Serif SC',serif;font-size:.95rem;margin-bottom:.4rem}
+.platform-card p{font-size:.78rem;color:var(--ink-dim);line-height:1.8}
+
+/* ============================================================
+   JOIN
+   ============================================================ */
+#join{text-align:center}
+#join .join-card{
+  background:var(--bg-card);border:1px solid rgba(192,72,66,.08);
+  border-radius:8px;padding:3rem 2rem;max-width:580px;margin:0 auto;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+#join .join-card p{color:var(--ink-body);line-height:2.2;margin-bottom:.8rem;font-size:.9rem}
+#join .req-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin:1.2rem 0 1.8rem}
+#join .req-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.4em 1.1em;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:20px;
+  font-size:.78rem;color:var(--gold-light);
+  transition:all .4s;cursor:default;
+}
+#join .req-badge:hover{transform:scale(1.04);border-color:rgba(192,72,66,.2);background:rgba(192,72,66,.06)}
+#join .req-badge i{font-size:.7rem;opacity:.5}
+#join .contact-info{
+  font-size:.82rem;color:var(--ink-dim);line-height:2.2;
+  padding:1.2rem;background:rgba(192,72,66,.02);border-radius:4px;
+}
+#join .contact-info strong{color:var(--vermillion-l)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  position:relative;z-index:1;text-align:center;
+  padding:3rem 2rem;border-top:1px solid var(--border);
+}
+footer .footer-moon{
+  width:32px;height:32px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fffef5,var(--vermillion));
+  margin:0 auto 1rem;opacity:.5;
+}
+footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+.back-top{
+  position:fixed;bottom:2rem;right:2rem;z-index:99;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--bg-card);border:1px solid var(--border);
+  color:var(--ink-dim);font-size:.8rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .35s;
+}
+.back-top:hover{color:var(--vermillion);border-color:var(--border-active);transform:translateY(-2px)}
+.music-toggle{
+  position:fixed;bottom:2rem;right:5rem;z-index:99;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--bg-card);border:1px solid var(--border);
+  color:var(--ink-dim);font-size:.8rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .35s;
+}
+.music-toggle:hover{color:var(--gold);border-color:var(--gold)}
+.music-toggle.muted{color:var(--ink-faint);opacity:.5}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:768px){
+  nav{padding:.7rem 1.2rem}
+  nav.scrolled{padding:.5rem 1.2rem}
+  nav .nav-links{gap:.8rem}
+  nav .nav-links a{font-size:.7rem}
+  .hero h1{font-size:2.5rem}
+  .hero .subtitle{font-size:.75rem;letter-spacing:.25em}
+  section{padding:3rem 1.2rem}
+  .section-title{font-size:1.5rem}
+  #about .about-grid{grid-template-columns:1fr}
+  #about .stats-row{gap:1.2rem}
+  .martial-grid{grid-template-columns:1fr}
+  .faction-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+  .weapon-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  .roster-inner{gap:1rem;padding:0 .8rem}
+  .roster-art{width:70px;gap:.7rem;padding-top:.8rem}
+  .roster-art .art-main{font-size:2rem}
+  .roster-art .art-sub{font-size:.7rem}
+  .roster-art .art-line{height:30px}
+  .roster-grid{padding:.5rem 0 1.5rem}
+  .member-card{width:72%}
+  .member-card:not(:first-child){margin-top:-30px}
+  .member-card .video-overlay{padding:1.6rem 1rem 1rem}
+  .member-card .m-name{font-size:1rem}
+  .member-card .role-tag{font-size:.58rem}
+  .member-card .m-motto{font-size:.66rem}
+  .lightbox .lb-prev{left:.5rem}.lightbox .lb-next{right:.5rem}
+}
+
+@media(max-width:480px){
+  nav .nav-links{gap:.4rem}
+  nav .nav-links a{font-size:.6rem;letter-spacing:.02em}
+  .hero h1{font-size:2rem}
+  .hero .tags{gap:.4rem}
+  .hero .tags span{font-size:.66rem;padding:.2em .7em}
+  .roster-inner{flex-direction:column;gap:.5rem;padding:0 .4rem}
+  .roster-art{width:100%;flex-direction:row;justify-content:center;gap:.8rem;padding-top:0;position:static}
+  .roster-art .art-main{writing-mode:horizontal-tb;font-size:1.6rem;letter-spacing:.25em}
+  .roster-art .art-sub{writing-mode:horizontal-tb;font-size:.7rem;letter-spacing:.15em}
+  .roster-art .art-line{width:30px;height:1px}
+  .roster-art .art-dot{width:3px;height:3px}
+  .member-card{width:88%}
+  .member-card:not(:first-child){margin-top:-20px}
+  .member-card .m-name{font-size:.9rem}
+  .member-card .video-overlay{padding:1.2rem .7rem .6rem}
+  .member-card .role-tag{font-size:.56rem}
+  .member-card .m-motto{font-size:.64rem}
+  .weapon-grid{grid-template-columns:1fr}
+  .video-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="splash" id="splash">
+  <video src="assets/videos/promo/1.mp4" id="splashVideo" autoplay muted playsinline></video>
+  <button class="skip-btn" id="skipBtn">跳过</button>
+  <button class="sound-btn" id="soundBtn" title="开启声音"><i class="fa-solid fa-volume-xmark"></i></button>
+</div>
+
+<div class="bg-video">
+  <video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" autoplay loop muted playsinline></video>
+  <div class="bg-video-mask"></div>
+</div>
+
+<audio id="bgMusic" src="assets/audio/背景音乐.m4a" loop preload="auto"></audio>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="navbar">
+  <a href="#" class="logo">
+    <img src="assets/images/游戏图标.png" alt="燕云十六声">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">百业介绍</a></li>
+    <li><a href="#martial">武学流派</a></li>
+    <li><a href="#factions">江湖门派</a></li>
+    <li><a href="#scenery">江湖映像</a></li>
+    <li><a href="#concept-art">原画设定</a></li>
+    <li><a href="#maps">地图展示</a></li>
+    <li><a href="#videos">视频中心</a></li>
+    <li><a href="#bosses">BOSS展示</a></li>
+    <li><a href="#roster">成员</a></li>
+    <li><a href="#join">加入</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     HERO — 暗夜水墨
+     ============================================================ -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>月亮城</h1>
+    <p class="subtitle">燕 云 十 六 声  ·  百 业</p>
+    <div class="divider">
+      <span class="line"></span><span class="dot"></span><span class="line"></span>
+    </div>
+    <p class="slogan">
+      月照千里，城纳百川<br>
+      以月为名，聚天下豪杰
+    </p>
+    <div class="tags">
+      <span>养生</span>
+      <span>探索</span>
+      <span>休闲</span>
+      <span>江湖</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="mouse"></div>
+    <span>向下探索</span>
+  </div>
+</div>
+
+<div class="section-wrap">
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-label">About</div>
+    <h2 class="section-title">月亮城 · 百业介绍</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <h3>关于月亮城</h3>
+      <p>月亮城是<span class="highlight">燕云十六声</span>中的休闲养生百业，坐落于燕云大地的静谧一隅，以月为名，汇聚志同道合的江湖侠客。</p>
+      <p>我们秉持<span class="highlight">"月照千里，城纳百川"</span>的理念，无论你是初入燕云的<span class="highlight">新秀</span>，还是身经百战的<span class="highlight">高手</span>，这里都有属于你的一席之地。</p>
+      <p>百业方向涵盖养生、探索、休闲，定期举办月下论剑、城池共建、江湖探索队等丰富活动，让每一位成员都能找到属于自己的江湖节奏。</p>
+    </div>
+    <div class="about-visual">
+      <svg viewBox="0 0 200 240" style="width:180px;opacity:.6">
+        <defs>
+          <radialGradient id="mG"><stop offset="0%" stop-color="#fffef5"/><stop offset="100%" stop-color="#c8b080"/></radialGradient>
+          <linearGradient id="tG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1714"/><stop offset="100%" stop-color="#2a2724"/></linearGradient>
+        </defs>
+        <circle cx="100" cy="80" r="55" fill="url(#mG)" opacity=".85"/>
+        <circle cx="100" cy="80" r="55" fill="none" stroke="rgba(192,72,66,.1)" stroke-width=".5"/>
+        <rect x="55" y="130" width="90" height="75" fill="url(#tG)" rx="4" opacity=".6"/>
+        <rect x="65" y="140" width="20" height="16" fill="rgba(232,228,220,.08)" rx="1"/>
+        <rect x="92" y="140" width="20" height="16" fill="rgba(232,228,220,.08)" rx="1"/>
+        <rect x="65" y="162" width="18" height="14" fill="rgba(232,228,220,.05)" rx="1"/>
+        <rect x="88" y="162" width="18" height="14" fill="rgba(232,228,220,.05)" rx="1"/>
+        <rect x="111" y="162" width="18" height="14" fill="rgba(232,228,220,.05)" rx="1"/>
+        <text x="100" y="225" text-anchor="middle" fill="#706c64" font-size="10" font-family="serif">月 亮 城</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="stats-row reveal">
+    <div class="stat-item"><div class="num">20+</div><div class="lbl">活跃成员</div></div>
+    <div class="stat-item"><div class="num">Lv.3</div><div class="lbl">百业等级</div></div>
+    <div class="stat-item"><div class="num">全服</div><div class="lbl">招募范围</div></div>
+    <div class="stat-item"><div class="num">养生</div><div class="lbl">百业方向</div></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SYSTEM
+     ============================================================ -->
+<section id="system">
+  <div class="section-header">
+    <div class="section-label">System</div>
+    <h2 class="section-title">百业系统详解</h2>
+    <div class="section-divider"></div>
+    <div style="max-width:560px;margin:1.2rem auto 0;opacity:.45">
+      <img src="assets/images/professions/professions_all.png" alt="百业图标" style="width:100%;height:auto;border-radius:4px" loading="lazy">
+    </div>
+  </div>
+
+  <div class="tabs-nav">
+    <button class="active" data-tab="tab-overview">系统概述</button>
+    <button data-tab="tab-business">产业经营</button>
+    <button data-tab="tab-social">社交互动</button>
+    <button data-tab="tab-raid">众志凌霄</button>
+    <button data-tab="tab-bonus">福利奖励</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-overview">
+    <div class="sys-grid">
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-store"></i></div><h4>虚拟经营</h4><p>开设酒馆、澡堂、茶楼、销金窟等产业，销售产品获取收益，升级设施扩大经营规模。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-tree"></i></div><h4>田园生活</h4><p>种植药材果蔬、养殖家禽、酿酒制茶，享受远离纷争的田园生活。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-map"></i></div><h4>地图探索</h4><p>燕云十六州广阔开放世界，隐藏奇遇、宝箱、风景点等待探索发现。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-building-columns"></i></div><h4>百业建设</h4><p>成员共同建设百业领地，升级百业科技树，解锁更多功能与福利。</p></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-business">
+    <div class="sys-grid">
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-beer-mug-empty"></i></div><h4>酒馆经营</h4><p>酿造各类美酒，招待四方来客，酒香不怕巷子深。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-bath"></i></div><h4>澡堂经营</h4><p>开设澡堂，提供洗浴服务，文人墨客、江湖豪杰皆为好客。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-mug-hot"></i></div><h4>茶楼经营</h4><p>品茗论道，茶香四溢，风雅之士汇聚一堂。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-dice"></i></div><h4>销金窟</h4><p>高端娱乐场所，一掷千金，尽显豪气。</p></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-social">
+    <div class="sys-grid">
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-comments"></i></div><h4>百业频道</h4><p>内置百业专属聊天频道，实时交流攻略心得、组队信息。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-gift"></i></div><h4>物资共享</h4><p>成员间可互相赠送基础物资，新人入驻即可获得启动资源。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-ranking-star"></i></div><h4>百业排行</h4><p>全服百业排行榜，与各大百业一较高下，争取更高荣誉。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-calendar-check"></i></div><h4>定期活动</h4><p>百业专属活动日历，月下论剑、城池共建、探索队等常规赛事。</p></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-raid">
+    <div class="sys-grid">
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-dragon"></i></div><h4>世界BOSS</h4><p>集结百业成员讨伐世界首领，掉落稀有装备、材料。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-dungeon"></i></div><h4>副本攻坚</h4><p>组队挑战高难度副本，统战使带队，新人优先带飞。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-shield-halved"></i></div><h4>众志凌霄</h4><p>百业联合作战，多队伍协同攻克超大型BOSS，奖励丰厚。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-trophy"></i></div><h4>竞速挑战</h4><p>副本通关竞速赛，最快完成者获得额外奖励与荣誉称号。</p></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-bonus">
+    <div class="sys-grid">
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-coins"></i></div><h4>每日俸禄</h4><p>每日登录领取百业俸禄，百业等级越高奖励越丰厚。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-percent"></i></div><h4>百业折扣</h4><p>百业成员在百业商店享受专属折扣，购买道具更优惠。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-box-open"></i></div><h4>周常宝箱</h4><p>完成周常任务领取百业宝箱，开出随机珍稀道具。</p></div>
+      <div class="sys-card"><div class="icon-circle"><i class="fa-solid fa-star"></i></div><h4>专属称号</h4><p>达到指定贡献度解锁百业专属称号与头像框，彰显身份。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MARTIAL ARTS
+     ============================================================ -->
+<section id="martial">
+  <div class="section-header">
+    <div class="section-label">Martial Arts</div>
+    <h2 class="section-title">六大武学流派</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="martial-grid">
+    <div class="martial-card reveal">
+      <div class="card-top"><div class="elem-icon"><i class="fa-solid fa-sword"></i></div><div class="info"><h4>鸣金·虹</h4><div class="en">MINGJIN · HONG</div></div></div>
+      <div class="card-body">
+        <div class="row"><span class="key">武器</span><span class="val">剑 + 枪</span></div>
+        <div class="row"><span class="key">心法</span><span class="val">无名心法 · 威猛歌 · 易水歌 · 千山法</span></div>
+        <div class="row"><span class="key">定位</span><span class="val">PVP / PVE 均衡</span></div>
+        <div class="difficulty"><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span></div>
+        <p class="desc">频繁蓄力打出剑气，高爆发稳定输出。体力耗尽切枪周旋，攻守流畅——官方认证"宝宝流派"，新手首选。</p>
+        <div class="tag-row"><span class="tag">新手推荐</span><span class="tag">均衡</span><span class="tag">蓄力爆发</span></div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+    </div>
+    <div class="martial-card reveal">
+      <div class="card-top"><div class="elem-icon"><i class="fa-solid fa-feather-pointed"></i></div><div class="info"><h4>牵丝·玉</h4><div class="en">QIANSI · YU</div></div></div>
+      <div class="card-body">
+        <div class="row"><span class="key">武器</span><span class="val">伞 + 扇</span></div>
+        <div class="row"><span class="key">心法</span><span class="val">花上月令 · 断石之构 · 易水歌 · 极乐泣血</span></div>
+        <div class="row"><span class="key">定位</span><span class="val">PVE 远程输出</span></div>
+        <div class="difficulty"><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span></div>
+        <p class="desc">利用花上月令叠层，将大量"不谢花"弹幕洒向敌人，站桩输出看着BOSS被射死。分飞天玉和走地玉两种玩法，刷副本爽度极高。</p>
+        <div class="tag-row"><span class="tag">逃课流派</span><span class="tag">远程弹幕</span><span class="tag">高输出</span></div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+    </div>
+    <div class="martial-card reveal">
+      <div class="card-top"><div class="elem-icon"><i class="fa-solid fa-khanda"></i></div><div class="info"><h4>破竹·风</h4><div class="en">POZHU · FENG</div></div></div>
+      <div class="card-body">
+        <div class="row"><span class="key">武器</span><span class="val">双刀 + 绳镖</span></div>
+        <div class="row"><span class="key">心法</span><span class="val">望川绝响 · 心弥泥鱼 · 易水歌 · 极乐泣血</span></div>
+        <div class="row"><span class="key">定位</span><span class="val">PVP 刺客</span></div>
+        <div class="difficulty"><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span></div>
+        <p class="desc">出色机动性与高段数连击输出，贴脸打出超高爆发。绳镖可中距离骚扰或快速接近。完全没有防御手段，容错率极低，极度吃操作与走位。</p>
+        <div class="tag-row"><span class="tag">刺客</span><span class="tag">高操作</span><span class="tag">PVP王者</span></div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+    </div>
+    <div class="martial-card reveal">
+      <div class="card-top"><div class="elem-icon"><i class="fa-solid fa-bolt"></i></div><div class="info"><h4>鸣金·影</h4><div class="en">MINGJIN · YING</div></div></div>
+      <div class="card-body">
+        <div class="row"><span class="key">武器</span><span class="val">剑 + 枪</span></div>
+        <div class="row"><span class="key">心法</span><span class="val">逐狼心经 · 剑气纵横 · 易水歌 · 极乐泣血</span></div>
+        <div class="row"><span class="key">定位</span><span class="val">PVP / PVE T0</span></div>
+        <div class="difficulty"><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span></div>
+        <p class="desc">流血叠层→引爆伤害机制，当前T0级输出天花板。操作难度极高，叠层与引爆时机至关重要，入门门槛极高、上限也极高。</p>
+        <div class="tag-row"><span class="tag">T0输出</span><span class="tag">流血引爆</span><span class="tag">高门槛</span></div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+    </div>
+    <div class="martial-card reveal">
+      <div class="card-top"><div class="elem-icon"><i class="fa-solid fa-shield-halved"></i></div><div class="info"><h4>裂石·威</h4><div class="en">LIESHI · WEI</div></div></div>
+      <div class="card-body">
+        <div class="row"><span class="key">武器</span><span class="val">枪 + 陌刀</span></div>
+        <div class="row"><span class="key">心法</span><span class="val">山河绝韵 · 易水歌 · 断石之构</span></div>
+        <div class="row"><span class="key">定位</span><span class="val">坦克 / 前排</span></div>
+        <div class="difficulty"><span class="star"><i class="fa-solid fa-star"></i></span><span class="star"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span></div>
+        <p class="desc">先以枪武学获取减伤，再以刀武学套盾，生存能力极高。有护盾、减伤、嘲讽、抗打断，多人副本核心坦克。操作简单，新手强力推荐。</p>
+        <div class="tag-row"><span class="tag">新手推荐</span><span class="tag">坦克</span><span class="tag">团队核心</span></div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+    </div>
+    <div class="martial-card reveal">
+      <div class="card-top"><div class="elem-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="info"><h4>牵丝·霖</h4><div class="en">QIANSI · LIN</div></div></div>
+      <div class="card-body">
+        <div class="row"><span class="key">武器</span><span class="val">伞 + 扇</span></div>
+        <div class="row"><span class="key">心法</span><span class="val">君臣药 · 易水歌 · 杏花不见 · 牵丝蛊</span></div>
+        <div class="row"><span class="key">定位</span><span class="val">唯一治疗辅助</span></div>
+        <div class="difficulty"><span class="star"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span><span class="star off"><i class="fa-solid fa-star"></i></span></div>
+        <p class="desc">游戏中唯一的治疗辅助流派。扇武学提供大量治疗，伞武学提供强力BUFF，开荒、副本、PVP都极高地位，队友最爱。操作简单，新手首选。</p>
+        <div class="tag-row"><span class="tag">奶妈</span><span class="tag">新手首选</span><span class="tag">团队必备</span></div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FACTIONS
+     ============================================================ -->
+<section id="factions">
+  <div class="section-header">
+    <div class="section-label">Factions</div>
+    <h2 class="section-title">江湖门派</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="faction-grid reveal">
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-shield-halved"></i></div><div class="f-name">天泉</div><div class="f-detail" style="display:none">以守为攻，嘲讽敌人吸引火力，团队中坚不可摧的盾牌。天泉门人以护佑苍生为己任，身着重甲，手持陌刀，冲锋陷阵，万夫莫开。</div><div class="f-role">肉盾 · 嘲讽</div><div class="f-weapon">陌刀</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-wave-square"></i></div><div class="f-name">狂澜</div><div class="f-detail" style="display:none">攻守兼备，进退有据。狂澜派弟子精通枪法与刀法，既能以长枪打出凌厉攻势，也能切换陌刀坚守阵地，战场上的多面手。</div><div class="f-role">输出 · 防御双修</div><div class="f-weapon">长枪 · 陌刀</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-cloud"></i></div><div class="f-name">孤雲</div><div class="f-detail" style="display:none">剑走轻灵，潇洒飘逸。孤雲剑客独来独往，追求剑道的极致之美，输出稳定均衡，适合各类战斗场景。</div><div class="f-role">均衡输出</div><div class="f-weapon">剑</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-moon"></i></div><div class="f-name">三更天</div><div class="f-detail" style="display:none">暗夜中的刺客，以命搏命。三更天死士放弃防御，将所有力量倾注于双刀之上，追求极致的爆发输出，一击必杀。</div><div class="f-role">极限输出</div><div class="f-weapon">双刀</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-droplet"></i></div><div class="f-name">青溪</div><div class="f-detail" style="display:none">医者仁心，悬壶济世。青溪医者是江湖中唯一的治疗门派，以扇为器，施以回春之术，是团队不可或缺的生命线。</div><div class="f-role">唯一治疗</div><div class="f-weapon">扇子</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-leaf"></i></div><div class="f-name">無門無派</div><div class="f-detail" style="display:none">不拘泥于门派之见，集百家之长。无门无派者自由游走于江湖，随心所欲选择武器与武学，探索属于自己的武道之路。</div><div class="f-role">自由探索</div><div class="f-weapon">剑 · 枪</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-gears"></i></div><div class="f-name">墨山道</div><div class="f-detail" style="display:none">传承墨家机关术的隐秘组织。墨山道弟子精通水火毒三系奇术，以机关暗器配合元素之力，战术诡异多变，令人防不胜防。</div><div class="f-role">墨家机关术</div><div class="f-weapon">水火毒融合</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-flower"></i></div><div class="f-name">醉花阴</div><div class="f-detail" style="display:none">神秘莫测的花间派。醉花阴的武学与花相关，传闻其招式华丽无比，优雅中暗藏杀机，具体内容尚待江湖后续揭晓。</div><div class="f-role">待更新</div><div class="f-weapon">——</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-book-open"></i></div><div class="f-name">文津馆</div><div class="f-detail" style="display:none">以文入武，以学为道。文津馆的学者们博览群书，从古籍中领悟独特的武学心法，讲究以智取胜，四两拨千斤。</div><div class="f-role">学识之道</div><div class="f-weapon">——</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-masks-theater"></i></div><div class="f-name">梨園</div><div class="f-detail" style="display:none">戏中有武，武中有戏。梨園弟子以戏曲为根基，将唱念做打融入武学，招式优美如舞蹈，一颦一笑皆是杀招，具体内容尚待揭晓。</div><div class="f-role">待更新</div><div class="f-weapon">——</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-torii-gate"></i></div><div class="f-name">九流門</div><div class="f-role">待更新</div><div class="f-weapon">——</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    <div class="faction-card"><div class="f-icon"><i class="fa-solid fa-cloud-moon"></i></div><div class="f-name">無心谷</div><div class="f-role">待更新</div><div class="f-weapon">——</div><div class="click-hint">点击查看详情 <i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SCENERY — 轮播
+     ============================================================ -->
+<section id="scenery">
+  <div class="section-header">
+    <div class="section-label">Gallery</div>
+    <h2 class="section-title">江湖映像</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="tabs-nav">
+    <button class="active" data-tab="tab-scenery-scenes">江湖风光</button>
+    <button data-tab="tab-scenery-screenshots">游戏截图</button>
+    <button data-tab="tab-scenery-wallpapers">壁纸收藏</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-scenery-scenes">
+    <div class="carousel reveal" data-carousel>
+      <div class="carousel-track">
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396e7eb712552805a9fcceyZaHxVa607.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 江山如画</div><div class="v-desc">千里江山，尽收眼底。东方武侠世界的壮丽画卷。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396eaf7e1eaf00145ace07auQAKPNb07.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 水墨江湖</div><div class="v-desc">浓淡之间，写意江湖。每一帧皆为水墨丹青。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396f0a6142557810fe9076wTmoiC0Q07.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 风起云涌</div><div class="v-desc">风云变幻，侠客行远。感受燕云大地的四季流转。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/693a32d38d846b778721ff3dtg2Gs0uc07.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 月照千里</div><div class="v-desc">月下江湖，诗意栖居。月亮城与你共赏这片江湖。</div></div></div>
+      </div>
+      <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="carousel-dots" data-carousel-dots></div>
+  </div>
+
+  <div class="tab-panel" id="tab-scenery-screenshots">
+    <div class="carousel reveal" data-carousel>
+      <div class="carousel-track">
+        <div class="carousel-slide" data-full="assets/images/screenshots/1_c5984a3f.jpg"><img src="assets/images/screenshots/1_c5984a3f.jpg" alt="截图1" loading="lazy"><div class="slide-caption"><div><div class="s-name">江湖纪行</div><div class="s-desc">燕云世界中的精彩瞬间，记录每一段难忘的江湖旅程。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/2_511231cc.jpg"><img src="assets/images/screenshots/2_511231cc.jpg" alt="截图2" loading="lazy"><div class="slide-caption"><div><div class="s-name">风景如画</div><div class="s-desc">纤毫毕现的极致画质，还原真实的武侠世界。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/3_3c9809be.jpg"><img src="assets/images/screenshots/3_3c9809be.jpg" alt="截图3" loading="lazy"><div class="slide-caption"><div><div class="s-name">月下江湖</div><div class="s-desc">月照千里的燕云大地，每一处风景皆是壁纸。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/4_84052b1b.jpg"><img src="assets/images/screenshots/4_84052b1b.jpg" alt="截图4" loading="lazy"><div class="slide-caption"><div><div class="s-name">大宋风华</div><div class="s-desc">沉浸式体验千年前的东方武侠开放世界。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/5_b7b72f3f.jpg"><img src="assets/images/screenshots/5_b7b72f3f.jpg" alt="截图5" loading="lazy"><div class="slide-caption"><div><div class="s-name">侠客行</div><div class="s-desc">刀光剑影中感受东方武学的独特魅力。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/6_05e86dbf.jpg"><img src="assets/images/screenshots/6_05e86dbf.jpg" alt="截图6" loading="lazy"><div class="slide-caption"><div><div class="s-name">山河远阔</div><div class="s-desc">从塞外凉州到江南清河，壮丽的燕云山河。</div></div></div></div>
+      </div>
+      <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="carousel-dots" data-carousel-dots></div>
+  </div>
+
+  <div class="tab-panel" id="tab-scenery-wallpapers">
+    <div class="carousel reveal" data-carousel>
+      <div class="carousel-track">
+        <div class="carousel-slide" data-full="assets/images/wallpapers/1_8cb6e7a0.jpg"><img src="assets/images/wallpapers/1_8cb6e7a0.jpg" alt="壁纸1" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 壹</div><div class="s-desc">官方高清壁纸，展现燕云十六声的极致美学。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/3_0321c623.jpg"><img src="assets/images/wallpapers/3_0321c623.jpg" alt="壁纸2" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 贰</div><div class="s-desc">每一幅都是精雕细琢的艺术品。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/4_59953119.jpg"><img src="assets/images/wallpapers/4_59953119.jpg" alt="壁纸3" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 叁</div><div class="s-desc">沉浸东方美学，感受千年武侠文化。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/5_233e32b7.jpg"><img src="assets/images/wallpapers/5_233e32b7.jpg" alt="壁纸4" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 肆</div><div class="s-desc">以月为名，聚天下豪杰。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/8_94ea5638.jpg"><img src="assets/images/wallpapers/8_94ea5638.jpg" alt="壁纸5" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 伍</div><div class="s-desc">江湖路远，月城为家。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/9_82bf8ec0.jpg"><img src="assets/images/wallpapers/9_82bf8ec0.jpg" alt="壁纸6" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 陆</div><div class="s-desc">燕云十六声，东方武侠的终极呈现。</div></div></div></div>
+      </div>
+      <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="carousel-dots" data-carousel-dots></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONCEPT ART — 轮播
+     ============================================================ -->
+<section id="concept-art">
+  <div class="section-header">
+    <div class="section-label">Concept Art</div>
+    <h2 class="section-title">原画设定</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="carousel reveal" data-carousel>
+    <div class="carousel-track">
+      <div class="carousel-slide" data-full="assets/images/concept-art/1_c8216454.jpg"><img src="assets/images/concept-art/1_c8216454.jpg" alt="原画1" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 壹</div><div class="s-desc">燕云十六声角色与场景概念设计。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/2_01fbf3fe.jpg"><img src="assets/images/concept-art/2_01fbf3fe.jpg" alt="原画2" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 贰</div><div class="s-desc">雕梁画栋，精雕细琢的场景原画。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/3_085d1f4e.jpg"><img src="assets/images/concept-art/3_085d1f4e.jpg" alt="原画3" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 叁</div><div class="s-desc">东方武侠美学的极致呈现。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/4_8201d21f.jpg"><img src="assets/images/concept-art/4_8201d21f.jpg" alt="原画4" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 肆</div><div class="s-desc">江湖万象，尽在笔触之间。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/5_c98fea91.jpg"><img src="assets/images/concept-art/5_c98fea91.jpg" alt="原画5" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 伍</div><div class="s-desc">一笔一划勾勒出千年前的江湖。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/6_eee67ae4.jpg"><img src="assets/images/concept-art/6_eee67ae4.jpg" alt="原画6" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 陆</div><div class="s-desc">角色设计原画，展现独特东方美学。</div></div></div></div>
+    </div>
+    <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+  <div class="carousel-dots" data-carousel-dots></div>
+</section>
+
+<!-- ============================================================
+     MAPS
+     ============================================================ -->
+<section id="maps">
+  <div class="section-header">
+    <div class="section-label">Maps</div>
+    <h2 class="section-title">地图展示</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="carousel reveal" data-carousel>
+    <div class="carousel-track">
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/66e40968aeeb27f4de3d0a7aQvImN3JM05.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">清河 · 山水如画</div><div class="v-desc">清河郡的秀丽风光，小桥流水，田园诗意。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/675144df4de4ed2462a8908bwZirUecX05.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">开封 · 繁华似锦</div><div class="v-desc">汴京城繁华似锦，市井街巷，热闹非凡。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/67e20f79a3ea34c6151ecdab8x0PxsPb06.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">玉门关</div><div class="v-desc">春风不度玉门关，大漠边塞的苍凉与壮阔。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/6912f33769e0a05e5dcb176dAuu8thaX06.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">不见山</div><div class="v-desc">云雾深处不见山，山水之间的隐世秘境。</div></div></div>
+    </div>
+    <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+  <div class="carousel-dots" data-carousel-dots></div>
+</section>
+
+<!-- ============================================================
+     VIDEOS
+     ============================================================ -->
+<section id="videos">
+  <div class="section-header">
+    <div class="section-label">Videos</div>
+    <h2 class="section-title">视频中心</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="tabs-nav">
+    <button class="active" data-tab="tab-bili-main">Bilibili 官方</button>
+    <button data-tab="tab-bili-gameplay">实机演示</button>
+    <button data-tab="tab-weapons">武器展示</button>
+    <button data-tab="tab-promo">宣传片</button>
+    <button data-tab="tab-bili-official">官方平台</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-bili-main">
+    <div class="carousel" data-carousel>
+      <div class="carousel-track">
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1g9CGYqE2J.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">公测上线宣传片</div><div class="v-desc">12月27日正式公测，江湖新声由此开启。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1aykoYtEm1.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">公测剧情预告 PV</div><div class="v-desc">江湖，人人都想去江湖——五代十国的旧梦。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1FWe3zKER6.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">国际服定档预告</div><div class="v-desc">11月15日登陆PS5平台，燕云走向世界。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV18TLt6KEqZ.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">新武学宣传片</div><div class="v-desc">袁和平动作指导，电影级武侠打斗体验。</div></div></div>
+      </div>
+      <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="carousel-dots" data-carousel-dots></div>
+  </div>
+
+  <div class="tab-panel" id="tab-bili-gameplay">
+    <div class="carousel" data-carousel>
+      <div class="carousel-track">
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1AN4y1c7AZ.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">科隆展 5分钟实机首曝</div><div class="v-desc">国产开放世界新游首次亮相科隆游戏展。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Ra4y1R7JJ.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">黄钟测试 5分钟实机PV</div><div class="v-desc">黄钟测试阶段实机画面，展现开放世界玩法。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Ve41117yA.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">独家 4K DLSS 3 实机演示</div><div class="v-desc">RTX 5090 原生4K最高画质，极致视觉享受。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Qfcmz3Eex.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">开封皇宫镇守</div><div class="v-desc">封桩库（赵京娘）Boss战实机演示。</div></div></div>
+      </div>
+      <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="carousel-dots" data-carousel-dots></div>
+  </div>
+
+  <div class="tab-panel" id="tab-weapons">
+    <div class="carousel" data-carousel>
+      <div class="carousel-track">
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/唐横刀.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">唐横刀</div><div class="v-desc">百兵之胆，横刀立马。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/剑.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">剑</div><div class="v-desc">百兵之君，剑走轻灵。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/双刀.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">双刀</div><div class="v-desc">疾风骤雨，双刃破空。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/枪.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">长枪</div><div class="v-desc">百兵之王，枪出如龙。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/陌刀.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">陌刀</div><div class="v-desc">重刃无锋，势如破竹。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/扇.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">扇</div><div class="v-desc">翩若惊鸿，扇舞风华。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/绳镖.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">绳镖</div><div class="v-desc">飞星逐月，绳镖无影。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/手甲.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">手甲</div><div class="v-desc">近身短打，拳拳到肉。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/伞.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">伞</div><div class="v-desc">柔中带刚，伞影惊鸿。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/舞绫鼓.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">舞绫鼓</div><div class="v-desc">鼓舞飞扬，刚柔并济。</div></div></div>
+      </div>
+      <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="carousel-dots" data-carousel-dots></div>
+  </div>
+
+  <div class="tab-panel" id="tab-promo">
+    <div class="carousel" data-carousel>
+      <div class="carousel-track">
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 壹</div><div class="v-desc">燕云十六声宣传视频，领略东方武侠之美。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66ebebd66658882ac75ea66a4uDxCvWc05.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 贰</div><div class="v-desc">刀光剑影间，感受武学的极致魅力。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66ebec4eb838db8e314c7c60be7ufr7E05.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 叁</div><div class="v-desc">大宋风华，尽在燕云十六声。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396e5a2f870d7f37dd9272eBTtlo4S07.mp4" preload="metadata" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 肆</div><div class="v-desc">江湖路远，与君同行。</div></div></div>
+      </div>
+      <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="carousel-dots" data-carousel-dots></div>
+  </div>
+
+  <div class="tab-panel" id="tab-bili-official">
+    <div class="sys-grid">
+      <a href="https://www.yysls.cn/" target="_blank" class="platform-card"><div class="icon-circle"><i class="fa-solid fa-globe"></i></div><h4>官方网站</h4><p>yysls.cn — 最新资讯、版本更新、活动公告。</p></a>
+      <a href="https://space.bilibili.com/1567141152" target="_blank" class="platform-card"><div class="icon-circle"><i class="fa-brands fa-bilibili"></i></div><h4>Bilibili 官方账号</h4><p>燕云十六声官方 — 预告片、实机演示、开发日志。</p></a>
+      <a href="https://weibo.com/u/7765938906" target="_blank" class="platform-card"><div class="icon-circle"><i class="fa-brands fa-weibo"></i></div><h4>官方微博</h4><p>@燕云十六声 — 实时动态、社区互动、福利活动。</p></a>
+      <a href="https://www.youtube.com/@PlayStation/videos" target="_blank" class="platform-card"><div class="icon-circle"><i class="fa-brands fa-youtube"></i></div><h4>YouTube (PlayStation)</h4><p>Where Winds Meet — 英文预告片及主机端内容。</p></a>
+      <a href="https://store.steampowered.com/app/3157820/" target="_blank" class="platform-card"><div class="icon-circle"><i class="fa-brands fa-steam"></i></div><h4>Steam 商店</h4><p>燕云十六声 Steam 页面 — 评价、截图、系统需求。</p></a>
+      <a href="https://www.taptap.cn/app/233343" target="_blank" class="platform-card"><div class="icon-circle"><i class="fa-solid fa-mobile-screen"></i></div><h4>TapTap 专区</h4><p>移动端下载、玩家评价、攻略社区。</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ACTIVITIES
+     ============================================================ -->
+<section id="activities">
+  <div class="section-header">
+    <div class="section-label">Activities</div>
+    <h2 class="section-title">百业活动</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="activity-grid reveal">
+    <div class="activity-card"><div class="a-icon-circle"><i class="fa-solid fa-sword"></i></div><h4>月下论剑</h4><p>定期内部切磋赛，设单挑和团队两种赛制，胜者获"月之剑客"称号。</p></div>
+    <div class="activity-card"><div class="a-icon-circle"><i class="fa-solid fa-hammer"></i></div><h4>城池共建日</h4><p>每周固定一天集中建设百业领地，齐心协力打造最美的月亮之城。</p></div>
+    <div class="activity-card"><div class="a-icon-circle"><i class="fa-solid fa-map-location-dot"></i></div><h4>江湖探索队</h4><p>定期组队探索副本、攻略世界BOSS、收集奇珍异宝，新人优先带飞。</p></div>
+    <div class="activity-card"><div class="a-icon-circle"><i class="fa-solid fa-camera-retro"></i></div><h4>燕云摄影大赛</h4><p>用游戏内置相机记录最美的江湖瞬间，月赛评选，优秀作品制成百业壁纸。</p></div>
+    <div class="activity-card"><div class="a-icon-circle"><i class="fa-solid fa-person-running"></i></div><h4>跑图挑战赛</h4><p>限时跑图竞速，考验轻功技巧和地图熟悉度，最快完成路线者获胜。</p></div>
+    <div class="activity-card"><div class="a-icon-circle"><i class="fa-solid fa-feather-pointed"></i></div><h4>月夜诗会</h4><p>红炉雅集之外的诗文创作活动，吟诗作对、以文会友，风雅江湖。</p></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BOSSES
+     ============================================================ -->
+<section id="bosses">
+  <div class="section-header">
+    <div class="section-label">Bosses</div>
+    <h2 class="section-title">BOSS展示</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="carousel reveal" data-carousel>
+    <div class="carousel-track">
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef84f55bb0fc66bbe5eacWqtyvOYg07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef859a515160cec807f977Bwt368k07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef86122fc1311d87503b5MaMdmRe407.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef86ac6305bf289b21aa2BsqK827G07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef8734ab6ceee9744ec9et8LtJlUX07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef87c63e7e7b271a1c3a94AxpNusl07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef8832a2d65f005c0a769ItYGrAQj07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef88b90bb4435f893ebe4QVZE5uSV07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef893eb0a5fc52aeb7057qaiLZypD07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef89bee136ef1d7122724JRTw7JX307.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324868007687410b4cba82VlDZIhZ07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/6973249153c93d03e20cad34MkNkyt0l07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/6973249c30fc7b69da141c96x4QSkkyx07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324a4471dc97d406881c0ZgGz1IvS07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324ab63a2a046a3bbc483NxWYp0DZ07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324b2c04d9c665f4bca9d27MlQtxK07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324bba756f0137ca0078e50BKziby07.mp4" preload="metadata" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324ccf5dec57482231434tsVE6FZ307.mp4" preload="metadata" playsinline muted></video></div></div>
+    </div>
+    <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+  <div class="carousel-dots" data-carousel-dots></div>
+</section>
+
+<!-- ============================================================
+     ROSTER
+     ============================================================ -->
+<section id="roster">
+  <div class="section-header">
+    <div class="section-label">Members</div>
+    <h2 class="section-title">核心成员</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="roster-inner">
+      <div class="roster-art">
+        <div class="art-line"></div>
+        <div class="art-main">群英荟萃</div>
+        <div class="art-dot"></div>
+        <div class="art-sub">月照千里</div>
+        <div class="art-sub">城纳百川</div>
+        <div class="art-dot"></div>
+        <div class="art-line"></div>
+      </div>
+    <div class="roster-grid">
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/clip4fadb73c-f433-4eae-83ec-201f7ce3318b.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">月照千里，城纳百川</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/clip60947939-4cae-4c81-b1e6-e53a1274b73a.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">共筑共建，月城为家</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/clip9d067557-648e-44f2-8c58-59dae9f1b3c5.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">众志凌霄，战无不克</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/dreamina_7618917708058397979_1773917755749_m.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">兵马未动，粮草先行</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/dreamina_7619176539778780466_1773977883306_m.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">纵横捭阖，以礼会友</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/dreamina_7619775022365822218_1774117189653_m.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">剑指凌霄，舍我其谁</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/hailuo_1774120045.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/1.mp4" autoplay loop muted playsinline style="object-position:top"></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/hailuo_1774120886.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/hailuo_1774186445.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/hailuo_1774189442.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/hailuo_1774191168.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/hailuo_1774194492.mp4" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     JOIN
+     ============================================================ -->
+<section id="join">
+  <div class="section-header">
+    <div class="section-label">Join Us</div>
+    <h2 class="section-title">加入月亮城</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="join-card reveal">
+    <p style="font-size:1rem;">无论你是初入燕云的新秀，还是身经百战的高手，<br>只要你热爱这片江湖，<strong style="color:var(--vermillion-l)">月亮城的大门永远为你敞开</strong>。</p>
+    <p style="font-size:.8rem;color:var(--ink-dim);">百业方向：养生 · 探索 · 休闲 <i class="fa-solid fa-circle" style="font-size:.25rem;vertical-align:middle;margin:0 .4rem"></i> 招募等级：不限 | 活跃优先</p>
+    <div class="req-row">
+      <span class="req-badge"><i class="fa-solid fa-clock"></i> 活跃在线</span>
+      <span class="req-badge"><i class="fa-solid fa-comment-dots"></i> 友善合群</span>
+      <span class="req-badge"><i class="fa-solid fa-gamepad"></i> 热爱游戏</span>
+      <span class="req-badge"><i class="fa-solid fa-hand-holding-heart"></i> 乐于助人</span>
+    </div>
+    <div class="contact-info">
+      <p>游戏内搜索百业 <strong>「月亮城」</strong> 申请加入</p>
+      <p>或加入百业群获取更多信息</p>
+      <p style="font-size:.74rem;margin-top:.4rem;">解锁条件：完成主线第二章 → 进入开封鬼市 → 开启多人模式 → 等级达到20级</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.section-wrap -->
+
+
+<!-- Detail Modal -->
+<div class="detail-modal" id="detailModal">
+  <div class="dm-card">
+    <button class="dm-close" id="dmClose"><i class="fa-solid fa-times"></i></button>
+    <div id="dmContent"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     LIGHTBOX
+     ============================================================ -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close"><i class="fa-solid fa-times"></i></button>
+  <button class="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="lb-next"><i class="fa-solid fa-chevron-right"></i></button>
+  <img src="" alt="" id="lb-img">
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-moon"></div>
+  <p>月亮城 <i class="fa-solid fa-circle" style="font-size:.2rem;vertical-align:middle;margin:0 .4rem"></i> 燕云十六声百业<br>月照千里，城纳百川</p>
+  <p style="font-size:.64rem;margin-top:.3rem;opacity:.4">—— 以月为名，聚天下豪杰 ——</p>
+</footer>
+
+<button class="back-top" id="backTop" title="回到顶部"><i class="fa-solid fa-chevron-up"></i></button>
+<button class="music-toggle" id="musicToggle" title="背景音乐"><i class="fa-solid fa-music"></i></button>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+// ========== NAV + BACK TO TOP ==========
+const nav=document.getElementById('navbar'),bt=document.getElementById('backTop');
+addEventListener('scroll',()=>{
+  const sy=scrollY;
+  nav.classList.toggle('scrolled',sy>60);
+  bt.style.opacity=sy>500?'1':'0';
+  bt.style.pointerEvents=sy>500?'auto':'none';
+});
+bt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+// ========== BACKGROUND MUSIC ==========
+const bgMusic=document.getElementById('bgMusic');
+const musicToggle=document.getElementById('musicToggle');
+let musicPlaying=false;
+
+function playMusic(){
+  if(musicPlaying||!splashDone)return;
+  bgMusic.volume=0.3;
+  bgMusic.play().then(()=>{
+    musicPlaying=true;
+    musicToggle.classList.remove('muted');
+  }).catch(()=>{});
+}
+
+function fadeInMusic(){
+  if(musicPlaying)return;
+  bgMusic.volume=0;
+  bgMusic.play().then(()=>{
+    musicPlaying=true;
+    musicToggle.classList.remove('muted');
+    // Fade in over 1.5s
+    let vol=0, step=0.02, interval=setInterval(()=>{
+      vol=Math.min(vol+step,0.3);
+      bgMusic.volume=vol;
+      if(vol>=0.3)clearInterval(interval);
+    },100);
+  }).catch(()=>{});
+}
+
+function toggleMusic(){
+  if(musicPlaying){
+    bgMusic.pause();
+    musicPlaying=false;
+    musicToggle.classList.add('muted');
+  }else{
+    playMusic();
+  }
+}
+
+musicToggle.addEventListener('click',toggleMusic);
+
+// Try autoplay on first user interaction
+['click','scroll','keydown','touchstart'].forEach(evt=>{
+  addEventListener(evt,playMusic,{once:true});
+});
+
+// ========== SPLASH SCREEN ==========
+const splash=document.getElementById('splash');
+const splashVideo=document.getElementById('splashVideo');
+const skipBtn=document.getElementById('skipBtn');
+const soundBtn=document.getElementById('soundBtn');
+
+let splashDone=false;
+
+function closeSplash(){
+  if(splash.classList.contains('fade-out'))return;
+  splash.classList.add('fade-out');
+  splashVideo.pause();
+  splashDone=true;
+  fadeInMusic();
+  setTimeout(()=>{splash.style.display='none'},600);
+}
+
+// Set start time once metadata is ready
+if(splashVideo.readyState>=1){
+  splashVideo.currentTime=4;
+}else{
+  splashVideo.addEventListener('loadedmetadata',()=>{splashVideo.currentTime=4},{once:true});
+}
+
+// Click splash to unmute (user gesture required by browsers)
+soundBtn.addEventListener('click',e=>{
+  e.stopPropagation();
+  splashVideo.muted=false;
+  splashVideo.volume=1;
+  soundBtn.classList.add('on');
+  soundBtn.innerHTML='<i class=\"fa-solid fa-volume-high\"></i>';
+  soundBtn.title='声音已开启';
+  setTimeout(()=>{soundBtn.style.opacity='0';setTimeout(()=>soundBtn.remove(),400)},600);
+});
+
+splash.addEventListener('click',e=>{
+  if(e.target===skipBtn||e.target===soundBtn||soundBtn.contains(e.target))return;
+  if(splashVideo.muted){
+    splashVideo.muted=false;
+    splashVideo.volume=1;
+    soundBtn.classList.add('on');
+    soundBtn.innerHTML='<i class=\"fa-solid fa-volume-high\"></i>';
+    setTimeout(()=>{soundBtn.style.opacity='0';setTimeout(()=>soundBtn.remove(),400)},600);
+  }
+});
+
+splashVideo.addEventListener('ended',closeSplash);
+skipBtn.addEventListener('click',closeSplash);
+
+
+// ========== DETAIL MODAL ==========
+const detailModal=document.getElementById('detailModal');
+const dmContent=document.getElementById('dmContent');
+const dmClose=document.getElementById('dmClose');
+
+function openDetailModal(html){
+  dmContent.innerHTML=html;
+  detailModal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeDetailModal(){
+  detailModal.classList.remove('open');
+  document.body.style.overflow='';
+}
+
+dmClose.addEventListener('click',closeDetailModal);
+detailModal.addEventListener('click',e=>{
+  if(e.target===detailModal)closeDetailModal();
+});
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&detailModal.classList.contains('open'))closeDetailModal();
+});
+
+// Martial cards click
+document.querySelectorAll('.martial-card').forEach(card=>{
+  card.style.cursor='pointer';
+  card.addEventListener('click',()=>{
+    const top=card.querySelector('.card-top');
+    const rows=card.querySelectorAll('.card-body .row');
+    const desc=card.querySelector('.card-body .desc');
+    const tags=card.querySelector('.tag-row');
+    const stars=card.querySelector('.difficulty');
+
+    let html='';
+    // Icon + name
+    const icon=top.querySelector('.elem-icon').cloneNode(true);
+    const h4=top.querySelector('h4').textContent;
+    const en=top.querySelector('.en').textContent;
+    html+=`<div class="dm-icon">${icon.innerHTML}</div>`;
+    html+=`<div class="dm-name">${h4}</div>`;
+    html+=`<div class="dm-en">${en}</div>`;
+
+    // Stars
+    if(stars){
+      html+=`<div class="dm-stars">${stars.innerHTML}</div>`;
+    }
+
+    // Rows
+    rows.forEach(r=>{
+      const k=r.querySelector('.key').textContent;
+      const v=r.querySelector('.val').textContent;
+      html+=`<div class="dm-row"><span class="dm-key">${k}</span><span class="dm-val">${v}</span></div>`;
+    });
+
+    // Description
+    if(desc){
+      html+=`<div class="dm-desc">${desc.textContent}</div>`;
+    }
+
+    // Tags
+    if(tags){
+      const tagEls=tags.querySelectorAll('.tag');
+      let t='';
+      tagEls.forEach(tg=>{t+=`<span class="dm-tag">${tg.textContent}</span>`});
+      html+=`<div class="dm-tags">${t}</div>`;
+    }
+
+    openDetailModal(html);
+  });
+});
+
+// Faction cards click
+document.querySelectorAll('.faction-card').forEach(card=>{
+  card.style.cursor='pointer';
+  card.addEventListener('click',()=>{
+    const icon=card.querySelector('.f-icon').cloneNode(true);
+    const name=card.querySelector('.f-name').textContent;
+    const role=card.querySelector('.f-role').textContent;
+    const weapon=card.querySelector('.f-weapon').textContent;
+    const detail=card.querySelector('.f-detail');
+    const desc=detail?detail.textContent:'';
+
+    let html='';
+    html+=`<div class="dm-icon">${icon.innerHTML}</div>`;
+    html+=`<div class="dm-name">${name}</div>`;
+    html+=`<div class="dm-role">${role}</div>`;
+    html+=`<div class="dm-weapon"><i class="fa-solid fa-gavel"></i> ${weapon}</div>`;
+    html+=`<div class="dm-desc">${desc}</div>`;
+
+    openDetailModal(html);
+  });
+});
+
+// ========== TABS ==========
+document.querySelectorAll('.tabs-nav button').forEach(b=>{b.addEventListener('click',()=>{
+  const g=b.parentElement,sec=g.closest('section');
+  g.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  sec.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  const t=document.getElementById(b.dataset.tab);
+  if(t)t.classList.add('active');
+  // Re-init carousels in the newly active tab
+  t.querySelectorAll('[data-carousel]').forEach(initCarousel);
+})});
+
+// ========== CAROUSEL ==========
+function initCarousel(el){
+  if(el._carouselInited)return;
+  el._carouselInited=true;
+  const track=el.querySelector('.carousel-track');
+  const slides=el.querySelectorAll('.carousel-slide');
+  const prevBtn=el.querySelector('.carousel-btn.prev');
+  const nextBtn=el.querySelector('.carousel-btn.next');
+  const dotsContainer=el.parentElement.querySelector('[data-carousel-dots]')||el.nextElementSibling;
+  if(!slides.length)return;
+
+  let idx=0;
+  const dots=[];
+
+  // Create dots
+  if(dotsContainer&&dotsContainer.hasAttribute('data-carousel-dots')){
+    dotsContainer.innerHTML='';
+    slides.forEach((_,i)=>{
+      const d=document.createElement('button');
+      if(i===0)d.classList.add('active');
+      d.addEventListener('click',()=>goTo(i));
+      dotsContainer.appendChild(d);
+      dots.push(d);
+    });
+  }
+
+  function goTo(i){
+    idx=((i%slides.length)+slides.length)%slides.length;
+    track.style.transform=`translateX(-${idx*100}%)`;
+    dots.forEach((d,j)=>d.classList.toggle('active',j===idx));
+  }
+
+  prevBtn&&prevBtn.addEventListener('click',e=>{e.stopPropagation();goTo(idx-1)});
+  nextBtn&&nextBtn.addEventListener('click',e=>{e.stopPropagation();goTo(idx+1)});
+
+  // Touch swipe
+  let startX=0;
+  el.addEventListener('touchstart',e=>{startX=e.touches[0].clientX},{passive:true});
+  el.addEventListener('touchend',e=>{
+    const diff=startX-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>40){diff>0?goTo(idx+1):goTo(idx-1)}
+  });
+
+  // Click on slide opens lightbox (skip video slides)
+  slides.forEach((slide,i)=>{
+    if(slide.classList.contains('video-slide'))return;
+    slide.addEventListener('click',()=>{
+      const fullSrc=slide.dataset.full||slide.querySelector('img')?.src;
+      if(fullSrc)openLightbox(fullSrc);
+    });
+  });
+
+  // Auto-advance every 5s
+  let auto=setInterval(()=>goTo(idx+1),5000);
+  el.addEventListener('mouseenter',()=>clearInterval(auto));
+  el.addEventListener('mouseleave',()=>{clearInterval(auto);auto=setInterval(()=>goTo(idx+1),5000)});
+}
+// Init all carousels
+document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+
+// ========== LIGHTBOX ==========
+const lb=document.getElementById('lightbox');
+const lbImg=document.getElementById('lb-img');
+let lbCurrentSlides=[],lbIdx=0;
+
+function openLightbox(src){
+  lbImg.src=src;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeLightbox(){
+  lb.classList.remove('open');
+  document.body.style.overflow='';
+  lbImg.src='';
+}
+
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-close'))closeLightbox()});
+lb.querySelector('.lb-close').addEventListener('click',closeLightbox);
+addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLightbox()});
+
+// ========== VIDEO HOVER-PLAY + CLICK-FULLSCREEN ==========
+document.querySelectorAll('[data-video-card]').forEach(card=>{
+  const video=card.querySelector('video');
+  if(!video)return;
+
+  // Hover: play muted, show first frame as "poster"
+  card.addEventListener('mouseenter',()=>{
+    video.currentTime=0;
+    video.play().catch(()=>{});
+    video.classList.add('playing');
+  });
+  card.addEventListener('mouseleave',()=>{
+    video.pause();
+    video.currentTime=0;
+    video.classList.remove('playing');
+  });
+
+  // Click: fullscreen
+  card.querySelector('.video-wrap').addEventListener('click',e=>{
+    // Don't trigger if clicking on controls
+    if(e.target===video)return;
+    video.muted=false;
+    if(video.requestFullscreen){
+      video.requestFullscreen().catch(()=>{
+        video.muted=true;
+        video.play();
+      });
+    }else if(video.webkitRequestFullscreen){
+      video.webkitRequestFullscreen();
+    }
+  });
+
+  // When exiting fullscreen, re-mute
+  video.addEventListener('fullscreenchange',()=>{
+    if(!document.fullscreenElement)video.muted=true;
+  });
+});
+
+// ========== SCROLL REVEAL ==========
+(function(){
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.06,rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+})();
+
+// ========== ROSTER WHEEL ==========
+(function(){
+  const roster=document.getElementById('roster');
+  if(!roster)return;
+  const cards=roster.querySelectorAll('.member-card');
+  if(!cards.length)return;
+  const cfg={radius:28,spread:.04,step:.12};
+  function clamp(v,lo,hi){return v<lo?lo:v>hi?hi:v}
+
+  function update(scrollFraction){
+    cards.forEach((c,i)=>{
+      const phase=(scrollFraction+i*cfg.step)%1;
+      const dist=Math.abs(phase-.5)*2;
+      const rx=clamp((phase-.5)*cfg.radius*2,-cfg.radius,cfg.radius);
+      const sc=clamp(1-dist*cfg.spread,.92,1);
+      const op=clamp(1-dist*.55,.25,1);
+      c.style.setProperty('--rx',rx+'deg');
+      c.style.setProperty('--sc',sc);
+      c.style.setProperty('--op',op);
+    });
+  }
+
+  let ticking=false;
+  function onScroll(){
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        const rh=roster.getBoundingClientRect();
+        const viewMid=innerHeight*.5;
+        const sectionTop=rh.top+scrollY;
+        const totalH=rh.height-innerHeight;
+        const progress=(scrollY-sectionTop+viewMid)/totalH;
+        update(clamp(progress,.05,.95));
+        ticking=false;
+      });
+      ticking=true;
+    }
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+
+// ========== SCROLL SPY ==========
+(function(){
+  const ss=document.querySelectorAll('section[id]'),ls=document.querySelectorAll('.nav-links a');
+  addEventListener('scroll',()=>{
+    let cur='';
+    ss.forEach(s=>{if(scrollY>=s.offsetTop-200)cur=s.id});
+    ls.forEach(l=>l.style.color=l.getAttribute('href')==='#'+cur?'var(--gold)':'');
+  });
+})();
+
+// ========== DIAGNOSTIC (press D) ==========
+(()=>{
+  const line=document.createElement('div');
+  line.id='_diag';
+  line.style.cssText='position:fixed;top:0;left:50%;width:1px;height:100%;background:red;z-index:9999;pointer-events:none;transform:translateX(-.5px);display:none;';
+  document.body.appendChild(line);
+  addEventListener('keydown',e=>{
+    if(e.key==='d'||e.key==='D'){
+      const el=document.getElementById('_diag');
+      if(el){
+        const show=el.style.display==='none';
+        el.style.display=show?'block':'none';
+        if(show){
+          const sec=document.getElementById('roster');
+          const hdr=sec?.querySelector('.section-header');
+          const cards=sec?.querySelectorAll('.member-card');
+          console.log('=== 核心成员 诊断 ===');
+          console.log('Viewport:',innerWidth,'x',innerHeight);
+          if(hdr){const hr=hdr.getBoundingClientRect();console.log('Header: center='+(hr.left+hr.width/2))}
+          if(cards) cards.forEach((c,i)=>{const cr=c.getBoundingClientRect();console.log('Card #'+(i+1)+': center='+Math.round(cr.left+cr.width/2))});
+          console.log('红线 = 视口50%');
+        }
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
