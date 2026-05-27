@@ -79,6 +79,7 @@ body{
 }
 .splash .sound-btn:hover{background:rgba(0,0,0,.65);border-color:rgba(255,255,255,.4);color:#fff}
 .splash .sound-btn.on{color:var(--gold-light);border-color:rgba(184,148,74,.4)}
+@keyframes pulse{0%,100%{opacity:0.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
 
 .bg-video{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .bg-video video{width:100%;height:100%;object-fit:cover}
@@ -905,13 +906,13 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 <body>
 
 <div class="splash" id="splash">
-  <video src="assets/videos/promo/1.mp4" id="splashVideo" autoplay muted playsinline></video>
+  <video src="assets/videos/promo/1.mp4" id="splashVideo" preload="auto" autoplay muted playsinline webkit-playsinline disableRemotePlayback></video>
   <button class="skip-btn" id="skipBtn">跳过</button>
   <button class="sound-btn" id="soundBtn" title="开启声音"><i class="fa-solid fa-volume-xmark"></i></button>
 </div>
 
 <div class="bg-video">
-  <video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" autoplay loop muted playsinline></video>
+  <video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" preload="auto" autoplay loop muted playsinline webkit-playsinline disableRemotePlayback></video>
   <div class="bg-video-mask"></div>
 </div>
 
@@ -1682,10 +1683,37 @@ function closeSplash(){
 }
 
 // Set start time once metadata is ready
+function startSplashVideo(){
+  try{
+    splashVideo.currentTime=4;
+    var playPromise=splashVideo.play();
+    if(playPromise!==undefined){
+      playPromise.catch(function(){
+        // Autoplay blocked — show tap-to-start hint
+        splashVideo.style.opacity='0.3';
+        var hint=document.createElement('div');
+        hint.id='tapHint';
+        hint.style.cssText='position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:1.1rem;text-align:center;pointer-events:none;z-index:1;text-shadow:0 0 20px rgba(0,0,0,.8)';
+        hint.innerHTML='<div style="font-size:2.8rem;margin-bottom:.5rem;animation:pulse 1.5s infinite">▶</div><div>点击屏幕开始</div>';
+        splash.appendChild(hint);
+        function startOnTap(){
+          splashVideo.style.opacity='1';
+          splashVideo.play();
+          if(hint.parentNode)hint.remove();
+          splash.removeEventListener('click',startOnTap);
+        }
+        splash.addEventListener('click',startOnTap);
+      });
+    }
+  }catch(e){
+    splashVideo.currentTime=4;
+  }
+}
+
 if(splashVideo.readyState>=1){
-  splashVideo.currentTime=4;
+  startSplashVideo();
 }else{
-  splashVideo.addEventListener('loadedmetadata',()=>{splashVideo.currentTime=4},{once:true});
+  splashVideo.addEventListener('loadedmetadata',startSplashVideo,{once:true});
 }
 
 // Click splash to unmute (user gesture required by browsers)
