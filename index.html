@@ -79,10 +79,7 @@ body{
 }
 .splash .sound-btn:hover{background:rgba(0,0,0,.65);border-color:rgba(255,255,255,.4);color:#fff}
 .splash .sound-btn.on{color:var(--gold-light);border-color:rgba(184,148,74,.4)}
-#splashPlayHint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#fff;z-index:1;cursor:pointer;text-shadow:0 0 30px rgba(0,0,0,.7)}
-#splashPlayHint .play-icon{font-size:3.5rem;margin-bottom:.6rem;animation:pulse 1.8s ease-in-out infinite}
-#splashPlayHint .play-text{font-size:1.2rem;letter-spacing:.3em;opacity:.85}
-@keyframes pulse{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes pulse{0%,100%{opacity:0.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
 
 .bg-video{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .bg-video video{width:100%;height:100%;object-fit:cover}
@@ -850,8 +847,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
    ============================================================ */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.member-card.reveal{transform:translateX(-16.6667%) rotateX(var(--rx,0deg)) scale(var(--sc,1)) translateY(24px)}
-.member-card.reveal.visible{opacity:var(--op,1);transform:translateX(-16.6667%) rotateX(var(--rx,0deg)) scale(var(--sc,1)) translateY(0)}
 
 /* ============================================================
    RESPONSIVE
@@ -911,14 +906,13 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 <body>
 
 <div class="splash" id="splash">
-  <video src="assets/videos/promo/1.mp4" id="splashVideo" preload="auto" muted playsinline webkit-playsinline disableRemotePlayback poster="assets/images/hero-bg.jpg"></video>
-  <div id="splashPlayHint"><div class="play-icon">▶</div><div class="play-text">点击进入</div></div>
+  <video src="assets/videos/promo/1.mp4" id="splashVideo" preload="auto" autoplay muted playsinline webkit-playsinline disableRemotePlayback></video>
   <button class="skip-btn" id="skipBtn">跳过</button>
   <button class="sound-btn" id="soundBtn" title="开启声音"><i class="fa-solid fa-volume-xmark"></i></button>
 </div>
 
 <div class="bg-video">
-  <video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" id="bgVideo" preload="none" loop muted playsinline webkit-playsinline disableRemotePlayback></video>
+  <video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" preload="auto" autoplay loop muted playsinline webkit-playsinline disableRemotePlayback></video>
   <div class="bg-video-mask"></div>
 </div>
 
@@ -1674,11 +1668,10 @@ musicToggle.addEventListener('click',toggleMusic);
 // ========== SPLASH SCREEN ==========
 const splash=document.getElementById('splash');
 const splashVideo=document.getElementById('splashVideo');
-const splashHint=document.getElementById('splashPlayHint');
 const skipBtn=document.getElementById('skipBtn');
 const soundBtn=document.getElementById('soundBtn');
 
-let splashDone=false,splashStarted=false;
+let splashDone=false;
 
 function closeSplash(){
   if(splash.classList.contains('fade-out'))return;
@@ -1686,48 +1679,65 @@ function closeSplash(){
   splashVideo.pause();
   splashDone=true;
   fadeInMusic();
-  // Start background video after splash
-  var bgv=document.getElementById('bgVideo');
-  if(bgv){bgv.preload='auto';bgv.play().catch(()=>{})};
   setTimeout(()=>{splash.style.display='none'},600);
 }
 
-function unmuteSplash(){
+// Set start time once metadata is ready
+function startSplashVideo(){
+  try{
+    splashVideo.currentTime=0;
+    var playPromise=splashVideo.play();
+    if(playPromise!==undefined){
+      playPromise.catch(function(){
+        // Autoplay blocked — show tap-to-start hint
+        splashVideo.style.opacity='0.3';
+        var hint=document.createElement('div');
+        hint.id='tapHint';
+        hint.style.cssText='position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:1.1rem;text-align:center;pointer-events:none;z-index:1;text-shadow:0 0 20px rgba(0,0,0,.8)';
+        hint.innerHTML='<div style="font-size:2.8rem;margin-bottom:.5rem;animation:pulse 1.5s infinite">▶</div><div>点击屏幕开始</div>';
+        splash.appendChild(hint);
+        function startOnTap(){
+          splashVideo.style.opacity='1';
+          splashVideo.play();
+          if(hint.parentNode)hint.remove();
+          splash.removeEventListener('click',startOnTap);
+        }
+        splash.addEventListener('click',startOnTap);
+      });
+    }
+  }catch(e){
+    splashVideo.currentTime=0;
+  }
+}
+
+if(splashVideo.readyState>=1){
+  startSplashVideo();
+}else{
+  splashVideo.addEventListener('loadedmetadata',startSplashVideo,{once:true});
+}
+
+// Click splash to unmute (user gesture required by browsers)
+soundBtn.addEventListener('click',e=>{
+  e.stopPropagation();
   splashVideo.muted=false;
   splashVideo.volume=1;
   soundBtn.classList.add('on');
   soundBtn.innerHTML='<i class=\"fa-solid fa-volume-high\"></i>';
   soundBtn.title='声音已开启';
   setTimeout(()=>{soundBtn.style.opacity='0';setTimeout(()=>soundBtn.remove(),400)},600);
-}
+});
 
-function startSplash(){
-  if(splashStarted)return;
-  splashStarted=true;
-  splashHint.style.display='none';
-  splashVideo.currentTime=0;
-  splashVideo.play();
-  unmuteSplash();
-}
-
-// Preload video metadata
-if(splashVideo.readyState<1){
-  splashVideo.load();
-}
-
-// First tap anywhere starts the video
 splash.addEventListener('click',e=>{
   if(e.target===skipBtn||e.target===soundBtn||soundBtn.contains(e.target))return;
-  startSplash();
+  if(splashVideo.muted){
+    splashVideo.muted=false;
+    splashVideo.volume=1;
+    soundBtn.classList.add('on');
+    soundBtn.innerHTML='<i class=\"fa-solid fa-volume-high\"></i>';
+    setTimeout(()=>{soundBtn.style.opacity='0';setTimeout(()=>soundBtn.remove(),400)},600);
+  }
 });
-splashHint.addEventListener('click',e=>{
-  e.stopPropagation();
-  startSplash();
-});
-soundBtn.addEventListener('click',e=>{
-  e.stopPropagation();
-  if(!splashStarted)startSplash();else unmuteSplash();
-});
+
 splashVideo.addEventListener('ended',closeSplash);
 skipBtn.addEventListener('click',closeSplash);
 
