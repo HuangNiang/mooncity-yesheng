@@ -1685,7 +1685,7 @@ function closeSplash(){
 // Set start time once metadata is ready
 function startSplashVideo(){
   try{
-    splashVideo.currentTime=4;
+    splashVideo.currentTime=0;
     var playPromise=splashVideo.play();
     if(playPromise!==undefined){
       playPromise.catch(function(){
@@ -1706,7 +1706,7 @@ function startSplashVideo(){
       });
     }
   }catch(e){
-    splashVideo.currentTime=4;
+    splashVideo.currentTime=0;
   }
 }
 
