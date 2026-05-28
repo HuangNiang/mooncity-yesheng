@@ -6,8 +6,9 @@
 <title>月亮城 — 燕云十六声 · 百业</title>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 <link rel="preload" as="video" href="assets/videos/promo/1.mp4" fetchpriority="high" type="video/mp4">
-<link rel="preload" as="video" href="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" fetchpriority="high" type="video/mp4">
+<link rel="preload" as="video" href="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" fetchpriority="low" type="video/mp4">
 <link rel="preload" as="image" href="assets/images/游戏图标.png" fetchpriority="low" type="image/png">
+<link rel="preload" as="image" href="assets/images/hero-bg.jpg" fetchpriority="low">
 <style>
 
 /* ============================================================
@@ -66,7 +67,7 @@ body{
   background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.2);
   color:rgba(255,255,255,.8);font-size:.82rem;cursor:pointer;
   font-family:inherit;letter-spacing:.05em;
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
   transition:all .3s;
 }
 .splash .skip-btn:hover{background:rgba(0,0,0,.65);border-color:rgba(255,255,255,.4);color:#fff}
@@ -76,7 +77,7 @@ body{
   background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.2);
   color:rgba(255,255,255,.85);font-size:.85rem;cursor:pointer;
   font-family:inherit;letter-spacing:.05em;
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
   transition:all .3s;display:flex;align-items:center;gap:.4rem;
 }
 .splash .sound-btn:hover{background:rgba(0,0,0,.65);border-color:rgba(255,255,255,.4);color:#fff}
@@ -116,7 +117,7 @@ nav{
   padding:1rem 2.5rem;
   display:flex;justify-content:space-between;align-items:center;
   transition:all .4s;
-  background:rgba(8,8,15,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  background:rgba(8,8,15,.35);backdrop-filter:blur(12px);
 }
 nav.scrolled{
   background:rgba(8,8,15,.92);backdrop-filter:blur(18px);
@@ -155,10 +156,7 @@ nav .nav-links a:hover{color:var(--gold)}
 }
 .hero::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:40%;
-  background:
-    linear-gradient(195deg, transparent 40%, rgba(8,8,15,.55) 41%, rgba(8,8,15,.7) 50%, transparent 51%),
-    linear-gradient(168deg, transparent 46%, rgba(8,8,15,.6) 47%, rgba(8,8,15,.8) 58%, transparent 59%),
-    linear-gradient(180deg, transparent 50%, rgba(8,8,15,.5) 55%, var(--bg-deep) 100%);
+  background:linear-gradient(180deg, transparent 0%, rgba(8,8,15,.65) 40%, var(--bg-deep) 100%);
   pointer-events:none;z-index:0;
 }
 
@@ -216,7 +214,7 @@ nav .nav-links a:hover{color:var(--gold)}
    SECTION COMMONS
    ============================================================ */
 .section-wrap{position:relative;z-index:1;perspective:1000px}
-section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
+section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto;contain-intrinsic-size:auto 600px}
 .section-header{text-align:center;margin-bottom:3rem}
 
 /* ============================================================
@@ -232,7 +230,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
 #about .about-visual{
   background:var(--bg-card);border:1px solid rgba(192,72,66,.06);
   border-radius:6px;padding:2rem;text-align:center;position:relative;overflow:hidden;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
 #about .about-visual::before{
   content:'';position:absolute;inset:0;
@@ -255,7 +253,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   padding:.45em 1.3em;font-size:.78rem;
   background:rgba(17,17,24,.45);border:1px solid var(--border);color:var(--ink-dim);
   border-radius:2px;cursor:pointer;transition:all .35s;letter-spacing:.06em;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
 }
 .tabs-nav button:hover{color:var(--gold);border-color:rgba(200,162,88,.2)}
 .tabs-nav button.active{
@@ -273,7 +271,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
 .sys-card{
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:6px;padding:1.8rem 1.5rem;transition:all .4s;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
 .sys-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .sys-card .icon-circle{
@@ -292,7 +290,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
 .martial-card{
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:6px;padding:1.8rem;transition:all .4s;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
 .martial-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .martial-card .card-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
@@ -325,7 +323,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:6px;padding:1.5rem 1rem;text-align:center;
   transition:all .4s;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
 .faction-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .faction-card .f-icon{
@@ -475,7 +473,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
 .carousel-slide.video-slide{
   aspect-ratio:auto;cursor:default;background:var(--bg-card);
   border-radius:6px;overflow:hidden;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
 .carousel-slide.video-slide:hover img{transform:none}
 .carousel-slide.video-slide.weapon .video-wrap{padding-bottom:72%}
@@ -512,7 +510,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:8px;padding:2.2rem;max-width:480px;width:90vw;
   cursor:default;
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
   box-shadow:0 24px 80px rgba(0,0,0,.5);
   animation:dmFadeIn .35s ease-out;
 }
@@ -607,7 +605,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
 .video-card{
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:6px;overflow:hidden;transition:all .4s;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
 .video-card:hover{border-color:var(--border-active);box-shadow:var(--shadow-sm);transform:scale(1.01)}
 .video-wrap{
@@ -647,7 +645,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
 .activity-card{
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:6px;padding:1.8rem 1.4rem;text-align:center;transition:all .4s;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
 .activity-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .activity-card .a-icon-circle{
@@ -713,7 +711,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   opacity:var(--op,1);
   will-change:transform,opacity;
   transition:box-shadow .5s,border-color .5s;
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
 }
 .member-card:not(:first-child){margin-top:-40px}
 .member-card:hover{
@@ -756,7 +754,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   background:var(--bg-card);border:1px solid var(--border);
   border-radius:6px;padding:1.6rem;transition:all .4s;
   text-decoration:none;display:block;cursor:pointer;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
 .platform-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .platform-card .icon-circle{
@@ -775,7 +773,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
 #join .join-card{
   background:var(--bg-card);border:1px solid rgba(192,72,66,.08);
   border-radius:8px;padding:3rem 2rem;max-width:580px;margin:0 auto;
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
 }
 #join .join-card p{color:var(--ink-body);line-height:2.2;margin-bottom:.8rem;font-size:.9rem}
 #join .req-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin:1.2rem 0 1.8rem}
@@ -907,18 +905,15 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 </div>
 
 <div class="bg-video">
-  <video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" preload="metadata" fetchpriority="high" autoplay loop muted playsinline webkit-playsinline disableRemotePlayback></video>
+  <video data-src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" preload="none" fetchpriority="low" preload="none" autoplay loop muted playsinline webkit-playsinline disableRemotePlayback></video>
   <div class="bg-video-mask"></div>
 </div>
 
 <audio id="bgMusic" src="assets/audio/背景音乐.m4a" loop preload="none"></audio>
 
-<!-- ============================================================
-     NAVIGATION
-     ============================================================ -->
 <nav id="navbar">
   <a href="#" class="logo">
-    <img src="assets/images/游戏图标.png" alt="燕云十六声" fetchpriority="high" loading="eager">
+    <img src="assets/images/游戏图标.png" alt="燕云十六声" width="300" height="96" fetchpriority="high" loading="eager">
   </a>
   <ul class="nav-links">
     <li><a href="#about">百业介绍</a></li>
@@ -934,9 +929,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </ul>
 </nav>
 
-<!-- ============================================================
-     HERO — 暗夜水墨
-     ============================================================ -->
 <div class="hero">
   <div class="hero-content">
     <h1>月亮城</h1>
@@ -963,9 +955,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 
 <div class="section-wrap">
 
-<!-- ============================================================
-     ABOUT
-     ============================================================ -->
 <section id="about">
   <div class="section-header">
     <div class="section-label">About</div>
@@ -1007,9 +996,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </section>
 
-<!-- ============================================================
-     SYSTEM
-     ============================================================ -->
 <section id="system">
   <div class="section-header">
     <div class="section-label">System</div>
@@ -1074,9 +1060,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </section>
 
-<!-- ============================================================
-     MARTIAL ARTS
-     ============================================================ -->
 <section id="martial">
   <div class="section-header">
     <div class="section-label">Martial Arts</div>
@@ -1154,9 +1137,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </section>
 
-<!-- ============================================================
-     FACTIONS
-     ============================================================ -->
 <section id="factions">
   <div class="section-header">
     <div class="section-label">Factions</div>
@@ -1179,9 +1159,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </section>
 
-<!-- ============================================================
-     SCENERY — 轮播
-     ============================================================ -->
 <section id="scenery">
   <div class="section-header">
     <div class="section-label">Gallery</div>
@@ -1198,10 +1175,10 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="tab-panel active" id="tab-scenery-scenes">
     <div class="carousel reveal" data-carousel>
       <div class="carousel-track">
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396e7eb712552805a9fcceyZaHxVa607.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 江山如画</div><div class="v-desc">千里江山，尽收眼底。东方武侠世界的壮丽画卷。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396eaf7e1eaf00145ace07auQAKPNb07.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 水墨江湖</div><div class="v-desc">浓淡之间，写意江湖。每一帧皆为水墨丹青。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396f0a6142557810fe9076wTmoiC0Q07.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 风起云涌</div><div class="v-desc">风云变幻，侠客行远。感受燕云大地的四季流转。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/693a32d38d846b778721ff3dtg2Gs0uc07.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 月照千里</div><div class="v-desc">月下江湖，诗意栖居。月亮城与你共赏这片江湖。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396e7eb712552805a9fcceyZaHxVa607.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 江山如画</div><div class="v-desc">千里江山，尽收眼底。东方武侠世界的壮丽画卷。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396eaf7e1eaf00145ace07auQAKPNb07.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 水墨江湖</div><div class="v-desc">浓淡之间，写意江湖。每一帧皆为水墨丹青。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396f0a6142557810fe9076wTmoiC0Q07.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 风起云涌</div><div class="v-desc">风云变幻，侠客行远。感受燕云大地的四季流转。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/693a32d38d846b778721ff3dtg2Gs0uc07.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">燕云 · 月照千里</div><div class="v-desc">月下江湖，诗意栖居。月亮城与你共赏这片江湖。</div></div></div>
       </div>
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
       <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1242,9 +1219,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </section>
 
-<!-- ============================================================
-     CONCEPT ART — 轮播
-     ============================================================ -->
 <section id="concept-art">
   <div class="section-header">
     <div class="section-label">Concept Art</div>
@@ -1267,9 +1241,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="carousel-dots" data-carousel-dots></div>
 </section>
 
-<!-- ============================================================
-     MAPS
-     ============================================================ -->
 <section id="maps">
   <div class="section-header">
     <div class="section-label">Maps</div>
@@ -1279,10 +1250,10 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 
   <div class="carousel reveal" data-carousel>
     <div class="carousel-track">
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/66e40968aeeb27f4de3d0a7aQvImN3JM05.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">清河 · 山水如画</div><div class="v-desc">清河郡的秀丽风光，小桥流水，田园诗意。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/675144df4de4ed2462a8908bwZirUecX05.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">开封 · 繁华似锦</div><div class="v-desc">汴京城繁华似锦，市井街巷，热闹非凡。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/67e20f79a3ea34c6151ecdab8x0PxsPb06.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">玉门关</div><div class="v-desc">春风不度玉门关，大漠边塞的苍凉与壮阔。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/6912f33769e0a05e5dcb176dAuu8thaX06.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">不见山</div><div class="v-desc">云雾深处不见山，山水之间的隐世秘境。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/66e40968aeeb27f4de3d0a7aQvImN3JM05.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">清河 · 山水如画</div><div class="v-desc">清河郡的秀丽风光，小桥流水，田园诗意。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/675144df4de4ed2462a8908bwZirUecX05.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">开封 · 繁华似锦</div><div class="v-desc">汴京城繁华似锦，市井街巷，热闹非凡。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/67e20f79a3ea34c6151ecdab8x0PxsPb06.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">玉门关</div><div class="v-desc">春风不度玉门关，大漠边塞的苍凉与壮阔。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/maps/6912f33769e0a05e5dcb176dAuu8thaX06.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">不见山</div><div class="v-desc">云雾深处不见山，山水之间的隐世秘境。</div></div></div>
     </div>
     <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1290,9 +1261,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="carousel-dots" data-carousel-dots></div>
 </section>
 
-<!-- ============================================================
-     VIDEOS
-     ============================================================ -->
 <section id="videos">
   <div class="section-header">
     <div class="section-label">Videos</div>
@@ -1311,10 +1279,10 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="tab-panel active" id="tab-bili-main">
     <div class="carousel" data-carousel>
       <div class="carousel-track">
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1g9CGYqE2J.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">公测上线宣传片</div><div class="v-desc">12月27日正式公测，江湖新声由此开启。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1aykoYtEm1.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">公测剧情预告 PV</div><div class="v-desc">江湖，人人都想去江湖——五代十国的旧梦。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1FWe3zKER6.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">国际服定档预告</div><div class="v-desc">11月15日登陆PS5平台，燕云走向世界。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV18TLt6KEqZ.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">新武学宣传片</div><div class="v-desc">袁和平动作指导，电影级武侠打斗体验。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1g9CGYqE2J.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">公测上线宣传片</div><div class="v-desc">12月27日正式公测，江湖新声由此开启。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1aykoYtEm1.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">公测剧情预告 PV</div><div class="v-desc">江湖，人人都想去江湖——五代十国的旧梦。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1FWe3zKER6.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">国际服定档预告</div><div class="v-desc">11月15日登陆PS5平台，燕云走向世界。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV18TLt6KEqZ.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">新武学宣传片</div><div class="v-desc">袁和平动作指导，电影级武侠打斗体验。</div></div></div>
       </div>
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
       <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1325,10 +1293,10 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="tab-panel" id="tab-bili-gameplay">
     <div class="carousel" data-carousel>
       <div class="carousel-track">
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1AN4y1c7AZ.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">科隆展 5分钟实机首曝</div><div class="v-desc">国产开放世界新游首次亮相科隆游戏展。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Ra4y1R7JJ.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">黄钟测试 5分钟实机PV</div><div class="v-desc">黄钟测试阶段实机画面，展现开放世界玩法。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Ve41117yA.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">独家 4K DLSS 3 实机演示</div><div class="v-desc">RTX 5090 原生4K最高画质，极致视觉享受。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Qfcmz3Eex.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">开封皇宫镇守</div><div class="v-desc">封桩库（赵京娘）Boss战实机演示。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1AN4y1c7AZ.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">科隆展 5分钟实机首曝</div><div class="v-desc">国产开放世界新游首次亮相科隆游戏展。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Ra4y1R7JJ.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">黄钟测试 5分钟实机PV</div><div class="v-desc">黄钟测试阶段实机画面，展现开放世界玩法。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Ve41117yA.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">独家 4K DLSS 3 实机演示</div><div class="v-desc">RTX 5090 原生4K最高画质，极致视觉享受。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bilibili/BV1Qfcmz3Eex.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">开封皇宫镇守</div><div class="v-desc">封桩库（赵京娘）Boss战实机演示。</div></div></div>
       </div>
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
       <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1339,16 +1307,16 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="tab-panel" id="tab-weapons">
     <div class="carousel" data-carousel>
       <div class="carousel-track">
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/唐横刀.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">唐横刀</div><div class="v-desc">百兵之胆，横刀立马。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/剑.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">剑</div><div class="v-desc">百兵之君，剑走轻灵。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/双刀.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">双刀</div><div class="v-desc">疾风骤雨，双刃破空。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/枪.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">长枪</div><div class="v-desc">百兵之王，枪出如龙。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/陌刀.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">陌刀</div><div class="v-desc">重刃无锋，势如破竹。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/扇.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">扇</div><div class="v-desc">翩若惊鸿，扇舞风华。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/绳镖.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">绳镖</div><div class="v-desc">飞星逐月，绳镖无影。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/手甲.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">手甲</div><div class="v-desc">近身短打，拳拳到肉。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/伞.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">伞</div><div class="v-desc">柔中带刚，伞影惊鸿。</div></div></div>
-        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/舞绫鼓.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">舞绫鼓</div><div class="v-desc">鼓舞飞扬，刚柔并济。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/唐横刀.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">唐横刀</div><div class="v-desc">百兵之胆，横刀立马。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/剑.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">剑</div><div class="v-desc">百兵之君，剑走轻灵。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/双刀.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">双刀</div><div class="v-desc">疾风骤雨，双刃破空。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/枪.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">长枪</div><div class="v-desc">百兵之王，枪出如龙。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/陌刀.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">陌刀</div><div class="v-desc">重刃无锋，势如破竹。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/扇.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">扇</div><div class="v-desc">翩若惊鸿，扇舞风华。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/绳镖.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">绳镖</div><div class="v-desc">飞星逐月，绳镖无影。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/手甲.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">手甲</div><div class="v-desc">近身短打，拳拳到肉。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/伞.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">伞</div><div class="v-desc">柔中带刚，伞影惊鸿。</div></div></div>
+        <div class="carousel-slide video-slide weapon" data-video-card><div class="video-wrap"><video src="assets/videos/weapons/舞绫鼓.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">舞绫鼓</div><div class="v-desc">鼓舞飞扬，刚柔并济。</div></div></div>
       </div>
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
       <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1359,10 +1327,10 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="tab-panel" id="tab-promo">
     <div class="carousel" data-carousel>
       <div class="carousel-track">
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 壹</div><div class="v-desc">燕云十六声宣传视频，领略东方武侠之美。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66ebebd66658882ac75ea66a4uDxCvWc05.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 贰</div><div class="v-desc">刀光剑影间，感受武学的极致魅力。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66ebec4eb838db8e314c7c60be7ufr7E05.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 叁</div><div class="v-desc">大宋风华，尽在燕云十六声。</div></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396e5a2f870d7f37dd9272eBTtlo4S07.mp4" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 肆</div><div class="v-desc">江湖路远，与君同行。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 壹</div><div class="v-desc">燕云十六声宣传视频，领略东方武侠之美。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66ebebd66658882ac75ea66a4uDxCvWc05.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 贰</div><div class="v-desc">刀光剑影间，感受武学的极致魅力。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/66ebec4eb838db8e314c7c60be7ufr7E05.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 叁</div><div class="v-desc">大宋风华，尽在燕云十六声。</div></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/promo/69396e5a2f870d7f37dd9272eBTtlo4S07.mp4" fetchpriority="low" preload="none" playsinline muted></video><div class="play-btn"></div></div><div class="video-info"><div class="v-title">宣传片 · 肆</div><div class="v-desc">江湖路远，与君同行。</div></div></div>
       </div>
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
       <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1382,9 +1350,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </section>
 
-<!-- ============================================================
-     ACTIVITIES
-     ============================================================ -->
 <section id="activities">
   <div class="section-header">
     <div class="section-label">Activities</div>
@@ -1401,9 +1366,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </section>
 
-<!-- ============================================================
-     BOSSES
-     ============================================================ -->
 <section id="bosses">
   <div class="section-header">
     <div class="section-label">Bosses</div>
@@ -1413,24 +1375,24 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 
   <div class="carousel reveal" data-carousel>
     <div class="carousel-track">
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef84f55bb0fc66bbe5eacWqtyvOYg07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef859a515160cec807f977Bwt368k07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef86122fc1311d87503b5MaMdmRe407.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef86ac6305bf289b21aa2BsqK827G07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef8734ab6ceee9744ec9et8LtJlUX07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef87c63e7e7b271a1c3a94AxpNusl07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef8832a2d65f005c0a769ItYGrAQj07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef88b90bb4435f893ebe4QVZE5uSV07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef893eb0a5fc52aeb7057qaiLZypD07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef89bee136ef1d7122724JRTw7JX307.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324868007687410b4cba82VlDZIhZ07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/6973249153c93d03e20cad34MkNkyt0l07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/6973249c30fc7b69da141c96x4QSkkyx07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324a4471dc97d406881c0ZgGz1IvS07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324ab63a2a046a3bbc483NxWYp0DZ07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324b2c04d9c665f4bca9d27MlQtxK07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324bba756f0137ca0078e50BKziby07.mp4" preload="none" playsinline muted></video></div></div>
-        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324ccf5dec57482231434tsVE6FZ307.mp4" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef84f55bb0fc66bbe5eacWqtyvOYg07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef859a515160cec807f977Bwt368k07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef86122fc1311d87503b5MaMdmRe407.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef86ac6305bf289b21aa2BsqK827G07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef8734ab6ceee9744ec9et8LtJlUX07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef87c63e7e7b271a1c3a94AxpNusl07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef8832a2d65f005c0a769ItYGrAQj07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef88b90bb4435f893ebe4QVZE5uSV07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef893eb0a5fc52aeb7057qaiLZypD07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/696ef89bee136ef1d7122724JRTw7JX307.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324868007687410b4cba82VlDZIhZ07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/6973249153c93d03e20cad34MkNkyt0l07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/6973249c30fc7b69da141c96x4QSkkyx07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324a4471dc97d406881c0ZgGz1IvS07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324ab63a2a046a3bbc483NxWYp0DZ07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324b2c04d9c665f4bca9d27MlQtxK07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324bba756f0137ca0078e50BKziby07.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
+        <div class="carousel-slide video-slide" data-video-card><div class="video-wrap"><video src="assets/videos/bosses/697324ccf5dec57482231434tsVE6FZ307.mp4" fetchpriority="low" preload="none" playsinline muted></video></div></div>
     </div>
     <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1438,9 +1400,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="carousel-dots" data-carousel-dots></div>
 </section>
 
-<!-- ============================================================
-     ROSTER
-     ============================================================ -->
 <section id="roster">
   <div class="section-header">
     <div class="section-label">Members</div>
@@ -1461,79 +1420,79 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
     <div class="roster-grid">
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/clip4fadb73c-f433-4eae-83ec-201f7ce3318b.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/clip4fadb73c-f433-4eae-83ec-201f7ce3318b.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">月照千里，城纳百川</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/clip60947939-4cae-4c81-b1e6-e53a1274b73a.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/clip60947939-4cae-4c81-b1e6-e53a1274b73a.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">共筑共建，月城为家</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/clip9d067557-648e-44f2-8c58-59dae9f1b3c5.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/clip9d067557-648e-44f2-8c58-59dae9f1b3c5.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">众志凌霄，战无不克</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/dreamina_7618917708058397979_1773917755749_m.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/dreamina_7618917708058397979_1773917755749_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">兵马未动，粮草先行</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/dreamina_7619176539778780466_1773977883306_m.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/dreamina_7619176539778780466_1773977883306_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">纵横捭阖，以礼会友</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/dreamina_7619775022365822218_1774117189653_m.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/dreamina_7619775022365822218_1774117189653_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">剑指凌霄，舍我其谁</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/hailuo_1774120045.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/hailuo_1774120045.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/1.mp4" autoplay loop muted playsinline style="object-position:top"></video>
+        <video src="assets/videos/members/1.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline style="object-position:top"></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/hailuo_1774120886.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/hailuo_1774120886.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/hailuo_1774186445.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/hailuo_1774186445.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/hailuo_1774189442.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/hailuo_1774189442.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/hailuo_1774191168.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/hailuo_1774191168.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
     <div class="member-card reveal">
       <div class="video-wrap">
-        <video src="assets/videos/members/hailuo_1774194492.mp4" autoplay loop muted playsinline></video>
+        <video src="assets/videos/members/hailuo_1774194492.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
@@ -1541,9 +1500,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </section>
 
-<!-- ============================================================
-     JOIN
-     ============================================================ -->
 <section id="join">
   <div class="section-header">
     <div class="section-label">Join Us</div>
@@ -1578,9 +1534,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   </div>
 </div>
 
-<!-- ============================================================
-     LIGHTBOX
-     ============================================================ -->
 <div class="lightbox" id="lightbox">
   <button class="lb-close"><i class="fa-solid fa-times"></i></button>
   <button class="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
@@ -1588,9 +1541,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <img src="" alt="" id="lb-img">
 </div>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
 <footer>
   <div class="footer-moon"></div>
   <p>月亮城 <i class="fa-solid fa-circle" style="font-size:.2rem;vertical-align:middle;margin:0 .4rem"></i> 燕云十六声百业<br>月照千里，城纳百川</p>
@@ -1600,11 +1550,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 <button class="back-top" id="backTop" title="回到顶部"><i class="fa-solid fa-chevron-up"></i></button>
 <button class="music-toggle" id="musicToggle" title="背景音乐"><i class="fa-solid fa-music"></i></button>
 
-<!-- ============================================================
-     SCRIPTS
-     ============================================================ -->
 <script>
-// ========== NAV + BACK TO TOP ==========
 const nav=document.getElementById('navbar'),bt=document.getElementById('backTop');
 addEventListener('scroll',()=>{
   const sy=scrollY;
@@ -1614,7 +1560,6 @@ addEventListener('scroll',()=>{
 });
 bt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
-// ========== BACKGROUND MUSIC ==========
 const bgMusic=document.getElementById('bgMusic');
 const musicToggle=document.getElementById('musicToggle');
 let musicPlaying=false;
@@ -1634,7 +1579,6 @@ function fadeInMusic(){
   bgMusic.play().then(()=>{
     musicPlaying=true;
     musicToggle.classList.remove('muted');
-    // Fade in over 1.5s
     let vol=0, step=0.02, interval=setInterval(()=>{
       vol=Math.min(vol+step,0.3);
       bgMusic.volume=vol;
@@ -1655,12 +1599,10 @@ function toggleMusic(){
 
 musicToggle.addEventListener('click',toggleMusic);
 
-// Try autoplay on first user interaction
 ['click','scroll','keydown','touchstart'].forEach(evt=>{
   addEventListener(evt,playMusic,{once:true});
 });
 
-// ========== SPLASH SCREEN ==========
 const splash=document.getElementById('splash');
 const splashVideo=document.getElementById('splashVideo');
 const skipBtn=document.getElementById('skipBtn');
@@ -1668,10 +1610,16 @@ const soundBtn=document.getElementById('soundBtn');
 
 let splashDone=false;
 
-// Skip splash on mobile (hidden by CSS)
+const bgVideo=document.querySelector('.bg-video video');
+function initBgVideo(){
+  if(!bgVideo||bgVideo.src)return;
+  var ds=bgVideo.dataset.src;
+  if(ds){bgVideo.src=ds;bgVideo.load()}
+}
 if(!splash||getComputedStyle(splash).display==='none'){
   splashDone=true;
   if(splashVideo)splashVideo.removeAttribute('preload');
+  initBgVideo();
 }
 
 function closeSplash(){
@@ -1680,17 +1628,16 @@ function closeSplash(){
   splashVideo.pause();
   splashDone=true;
   fadeInMusic();
+  initBgVideo();
   setTimeout(()=>{splash.style.display='none'},600);
 }
 
-// Set start time once metadata is ready
 function startSplashVideo(){
   try{
     splashVideo.currentTime=0;
     var playPromise=splashVideo.play();
     if(playPromise!==undefined){
       playPromise.catch(function(){
-        // Autoplay blocked — show tap-to-start hint
         splashVideo.style.opacity='0.3';
         var hint=document.createElement('div');
         hint.id='tapHint';
@@ -1717,7 +1664,6 @@ if(!splashDone&&splashVideo.readyState>=1){
   splashVideo.addEventListener('loadedmetadata',startSplashVideo,{once:true});
 }
 
-// Click splash to unmute (user gesture required by browsers)
 soundBtn.addEventListener('click',e=>{
   e.stopPropagation();
   splashVideo.muted=false;
@@ -1743,7 +1689,6 @@ splashVideo.addEventListener('ended',closeSplash);
 skipBtn.addEventListener('click',closeSplash);
 
 
-// ========== DETAIL MODAL ==========
 const detailModal=document.getElementById('detailModal');
 const dmContent=document.getElementById('dmContent');
 const dmClose=document.getElementById('dmClose');
@@ -1778,7 +1723,6 @@ document.querySelectorAll('.martial-card').forEach(card=>{
     const stars=card.querySelector('.difficulty');
 
     let html='';
-    // Icon + name
     const icon=top.querySelector('.elem-icon').cloneNode(true);
     const h4=top.querySelector('h4').textContent;
     const en=top.querySelector('.en').textContent;
@@ -1786,24 +1730,20 @@ document.querySelectorAll('.martial-card').forEach(card=>{
     html+=`<div class="dm-name">${h4}</div>`;
     html+=`<div class="dm-en">${en}</div>`;
 
-    // Stars
     if(stars){
       html+=`<div class="dm-stars">${stars.innerHTML}</div>`;
     }
 
-    // Rows
     rows.forEach(r=>{
       const k=r.querySelector('.key').textContent;
       const v=r.querySelector('.val').textContent;
       html+=`<div class="dm-row"><span class="dm-key">${k}</span><span class="dm-val">${v}</span></div>`;
     });
 
-    // Description
     if(desc){
       html+=`<div class="dm-desc">${desc.textContent}</div>`;
     }
 
-    // Tags
     if(tags){
       const tagEls=tags.querySelectorAll('.tag');
       let t='';
@@ -1837,7 +1777,6 @@ document.querySelectorAll('.faction-card').forEach(card=>{
   });
 });
 
-// ========== TABS ==========
 document.querySelectorAll('.tabs-nav button').forEach(b=>{b.addEventListener('click',()=>{
   const g=b.parentElement,sec=g.closest('section');
   g.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
@@ -1849,7 +1788,6 @@ document.querySelectorAll('.tabs-nav button').forEach(b=>{b.addEventListener('cl
   t.querySelectorAll('[data-carousel]').forEach(initCarousel);
 })});
 
-// ========== CAROUSEL ==========
 function initCarousel(el){
   if(el._carouselInited)return;
   el._carouselInited=true;
@@ -1901,7 +1839,6 @@ function initCarousel(el){
     });
   });
 
-  // Auto-advance every 5s
   let auto=setInterval(()=>goTo(idx+1),5000);
   el.addEventListener('mouseenter',()=>clearInterval(auto));
   el.addEventListener('mouseleave',()=>{clearInterval(auto);auto=setInterval(()=>goTo(idx+1),5000)});
@@ -1909,7 +1846,6 @@ function initCarousel(el){
 // Init all carousels
 document.querySelectorAll('[data-carousel]').forEach(initCarousel);
 
-// ========== LIGHTBOX ==========
 const lb=document.getElementById('lightbox');
 const lbImg=document.getElementById('lb-img');
 let lbCurrentSlides=[],lbIdx=0;
@@ -1930,7 +1866,6 @@ lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('l
 lb.querySelector('.lb-close').addEventListener('click',closeLightbox);
 addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLightbox()});
 
-// ========== VIDEO HOVER-PLAY + CLICK-FULLSCREEN ==========
 document.querySelectorAll('[data-video-card]').forEach(card=>{
   const video=card.querySelector('video');
   if(!video)return;
@@ -1968,13 +1903,11 @@ document.querySelectorAll('[data-video-card]').forEach(card=>{
   });
 });
 
-// ========== SCROLL REVEAL ==========
 (function(){
   const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.06,rootMargin:'0px 0px -20px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 })();
 
-// ========== ROSTER WHEEL ==========
 (function(){
   const roster=document.getElementById('roster');
   if(!roster)return;
@@ -2015,7 +1948,6 @@ document.querySelectorAll('[data-video-card]').forEach(card=>{
   onScroll();
 })();
 
-// ========== SCROLL SPY ==========
 (function(){
   const ss=document.querySelectorAll('section[id]'),ls=document.querySelectorAll('.nav-links a');
   addEventListener('scroll',()=>{
@@ -2023,6 +1955,15 @@ document.querySelectorAll('[data-video-card]').forEach(card=>{
     ss.forEach(s=>{if(scrollY>=s.offsetTop-200)cur=s.id});
     ls.forEach(l=>l.style.color=l.getAttribute('href')==='#'+cur?'var(--gold)':'');
   });
+})();
+
+(function(){
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{
+    const v=e.target.querySelector('video');
+    if(!v)return;
+    if(e.isIntersecting){v.play().catch(()=>{})}else{v.pause()}
+  })},{rootMargin:'300px 0px'});
+  document.querySelectorAll('.member-card').forEach(c=>obs.observe(c));
 })();
 
 </script>
