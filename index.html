@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月亮城 — 燕云十六声 · 百业</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 <link rel="preload" as="video" href="assets/videos/promo/1.mp4" fetchpriority="high">
 <link rel="preload" as="video" href="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" fetchpriority="high">
 <link rel="preload" as="image" href="assets/images/游戏图标.png" fetchpriority="low">
@@ -275,10 +275,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   border-radius:6px;padding:1.8rem 1.5rem;transition:all .4s;
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
-.sys-card:hover{
-  background:var(--bg-card2);border-color:var(--border-active);
-  transform:translateY(-2px) scale(1.02);box-shadow:var(--shadow-md);
-}
+.sys-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .sys-card .icon-circle{
   width:44px;height:44px;border-radius:50%;
   background:rgba(192,72,66,.04);border:1px solid var(--border);
@@ -297,10 +294,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   border-radius:6px;padding:1.8rem;transition:all .4s;
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
-.martial-card:hover{
-  background:var(--bg-card2);border-color:var(--border-active);
-  transform:translateY(-3px) scale(1.02);box-shadow:var(--shadow-md);
-}
+.martial-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .martial-card .card-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
 .martial-card .card-top .elem-icon{
   width:42px;height:42px;border-radius:50%;
@@ -333,10 +327,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   transition:all .4s;
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
-.faction-card:hover{
-  background:var(--bg-card2);border-color:var(--border-active);
-  transform:translateY(-3px) scale(1.03);box-shadow:var(--shadow-sm);
-}
+.faction-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .faction-card .f-icon{
   width:50px;height:50px;border-radius:50%;margin:0 auto .7rem;
   background:rgba(200,162,88,.04);border:1px solid rgba(200,162,88,.08);
@@ -658,10 +649,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   border-radius:6px;padding:1.8rem 1.4rem;text-align:center;transition:all .4s;
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
-.activity-card:hover{
-  background:var(--bg-card2);border-color:var(--border-active);
-  transform:translateY(-4px) scale(1.02);box-shadow:var(--shadow-md);
-}
+.activity-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .activity-card .a-icon-circle{
   width:48px;height:48px;border-radius:50%;
   background:rgba(192,72,66,.04);border:1px solid var(--border);
@@ -770,7 +758,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem}
   text-decoration:none;display:block;cursor:pointer;
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
-.platform-card:hover{background:var(--bg-card2);border-color:var(--border-active);transform:translateY(-2px) scale(1.02)}
+.platform-card:hover{background:var(--bg-card2);border-color:var(--border-active)}
 .platform-card .icon-circle{
   width:44px;height:44px;border-radius:50%;
   background:rgba(192,72,66,.04);border:1px solid var(--border);
@@ -2037,32 +2025,6 @@ document.querySelectorAll('[data-video-card]').forEach(card=>{
   });
 })();
 
-// ========== DIAGNOSTIC (press D) ==========
-(()=>{
-  const line=document.createElement('div');
-  line.id='_diag';
-  line.style.cssText='position:fixed;top:0;left:50%;width:1px;height:100%;background:red;z-index:9999;pointer-events:none;transform:translateX(-.5px);display:none;';
-  document.body.appendChild(line);
-  addEventListener('keydown',e=>{
-    if(e.key==='d'||e.key==='D'){
-      const el=document.getElementById('_diag');
-      if(el){
-        const show=el.style.display==='none';
-        el.style.display=show?'block':'none';
-        if(show){
-          const sec=document.getElementById('roster');
-          const hdr=sec?.querySelector('.section-header');
-          const cards=sec?.querySelectorAll('.member-card');
-          console.log('=== 核心成员 诊断 ===');
-          console.log('Viewport:',innerWidth,'x',innerHeight);
-          if(hdr){const hr=hdr.getBoundingClientRect();console.log('Header: center='+(hr.left+hr.width/2))}
-          if(cards) cards.forEach((c,i)=>{const cr=c.getBoundingClientRect();console.log('Card #'+(i+1)+': center='+Math.round(cr.left+cr.width/2))});
-          console.log('红线 = 视口50%');
-        }
-      }
-    }
-  });
-})();
 </script>
 </body>
 </html>
