@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月亮城 — 燕云十六声 · 百业</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preload" as="video" href="assets/videos/promo/1.mp4" fetchpriority="high">
+<link rel="preload" as="video" href="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" fetchpriority="low">
+<link rel="preload" as="image" href="assets/images/游戏图标.png" fetchpriority="high">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&display=swap');
 
@@ -907,7 +910,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 <body>
 
 <div class="splash" id="splash">
-  <video src="assets/videos/promo/1.mp4" id="splashVideo" preload="auto" autoplay muted playsinline webkit-playsinline disableRemotePlayback></video>
+  <video src="assets/videos/promo/1.mp4" id="splashVideo" preload="auto" fetchpriority="high" autoplay muted playsinline webkit-playsinline disableRemotePlayback></video>
   <button class="skip-btn" id="skipBtn">跳过</button>
   <button class="sound-btn" id="soundBtn" title="开启声音"><i class="fa-solid fa-volume-xmark"></i></button>
 </div>
@@ -924,7 +927,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
      ============================================================ -->
 <nav id="navbar">
   <a href="#" class="logo">
-    <img src="assets/images/游戏图标.png" alt="燕云十六声">
+    <img src="assets/images/游戏图标.png" alt="燕云十六声" fetchpriority="high" loading="eager">
   </a>
   <ul class="nav-links">
     <li><a href="#about">百业介绍</a></li>
