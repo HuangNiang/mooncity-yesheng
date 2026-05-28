@@ -854,7 +854,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
    RESPONSIVE
    ============================================================ */
 @media(max-width:768px){
-  .splash video{object-fit:contain}
+  .splash{display:none}
   nav{padding:.7rem 1.2rem}
   nav.scrolled{padding:.5rem 1.2rem}
   nav .nav-links{gap:.8rem}
@@ -1680,6 +1680,12 @@ const soundBtn=document.getElementById('soundBtn');
 
 let splashDone=false;
 
+// Skip splash on mobile (hidden by CSS)
+if(!splash||getComputedStyle(splash).display==='none'){
+  splashDone=true;
+  if(splashVideo)splashVideo.removeAttribute('preload');
+}
+
 function closeSplash(){
   if(splash.classList.contains('fade-out'))return;
   splash.classList.add('fade-out');
@@ -1717,9 +1723,9 @@ function startSplashVideo(){
   }
 }
 
-if(splashVideo.readyState>=1){
+if(!splashDone&&splashVideo.readyState>=1){
   startSplashVideo();
-}else{
+}else if(!splashDone){
   splashVideo.addEventListener('loadedmetadata',startSplashVideo,{once:true});
 }
 
