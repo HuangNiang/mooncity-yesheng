@@ -874,7 +874,8 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-sub{font-size:.7rem}
   .roster-art .art-line{height:30px}
   .roster-grid{padding:.5rem 0 1.5rem}
-  .member-card{width:72%}
+  .member-card{width:72%;transform:translateX(0) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
+  .member-card:hover{transform:translateX(0) rotateX(0deg) scale(1.04) !important}
   .member-card:not(:first-child){margin-top:-30px}
   .member-card .video-overlay{padding:1.6rem 1rem 1rem}
   .member-card .m-name{font-size:1rem}
@@ -895,7 +896,8 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-sub{writing-mode:horizontal-tb;font-size:.7rem;letter-spacing:.15em}
   .roster-art .art-line{width:30px;height:1px}
   .roster-art .art-dot{width:3px;height:3px}
-  .member-card{width:88%}
+  .member-card{width:88%;transform:translateX(0) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
+  .member-card:hover{transform:translateX(0) rotateX(0deg) scale(1.04) !important}
   .member-card:not(:first-child){margin-top:-20px}
   .member-card .m-name{font-size:.9rem}
   .member-card .video-overlay{padding:1.2rem .7rem .6rem}
