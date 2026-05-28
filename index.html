@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月亮城 — 燕云十六声 · 百业</title>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-<link rel="preload" as="video" href="assets/videos/promo/1.mp4" fetchpriority="high">
-<link rel="preload" as="video" href="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" fetchpriority="high">
-<link rel="preload" as="image" href="assets/images/游戏图标.png" fetchpriority="low">
+<link rel="preload" as="video" href="assets/videos/promo/1.mp4" fetchpriority="high" type="video/mp4">
+<link rel="preload" as="video" href="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" fetchpriority="high" type="video/mp4">
+<link rel="preload" as="image" href="assets/images/游戏图标.png" fetchpriority="low" type="image/png">
 <style>
 
 /* ============================================================
@@ -901,13 +901,13 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 <body>
 
 <div class="splash" id="splash">
-  <video src="assets/videos/promo/1.mp4" id="splashVideo" preload="auto" fetchpriority="high" autoplay muted playsinline webkit-playsinline disableRemotePlayback></video>
+  <video src="assets/videos/promo/1.mp4" id="splashVideo" preload="metadata" fetchpriority="high" autoplay muted playsinline webkit-playsinline disableRemotePlayback></video>
   <button class="skip-btn" id="skipBtn">跳过</button>
   <button class="sound-btn" id="soundBtn" title="开启声音"><i class="fa-solid fa-volume-xmark"></i></button>
 </div>
 
 <div class="bg-video">
-  <video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" preload="auto" fetchpriority="high" autoplay loop muted playsinline webkit-playsinline disableRemotePlayback></video>
+  <video src="assets/videos/promo/66eaa38192ee907e691a2581F9u2jtw505.mp4" preload="metadata" fetchpriority="high" autoplay loop muted playsinline webkit-playsinline disableRemotePlayback></video>
   <div class="bg-video-mask"></div>
 </div>
 
@@ -1016,7 +1016,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
     <h2 class="section-title">百业系统详解</h2>
     <div class="section-divider"></div>
     <div style="max-width:560px;margin:1.2rem auto 0;opacity:.45">
-      <img src="assets/images/professions/professions_all.png" alt="百业图标" style="width:100%;height:auto;border-radius:4px" loading="lazy">
+      <img src="assets/images/professions/professions_all.png" alt="百业图标" style="width:100%;height:auto;border-radius:4px" loading="lazy" decoding="async">
     </div>
   </div>
 
@@ -1212,12 +1212,12 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="tab-panel" id="tab-scenery-screenshots">
     <div class="carousel reveal" data-carousel>
       <div class="carousel-track">
-        <div class="carousel-slide" data-full="assets/images/screenshots/1_c5984a3f.jpg"><img src="assets/images/screenshots/1_c5984a3f.jpg" alt="截图1" loading="lazy"><div class="slide-caption"><div><div class="s-name">江湖纪行</div><div class="s-desc">燕云世界中的精彩瞬间，记录每一段难忘的江湖旅程。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/screenshots/2_511231cc.jpg"><img src="assets/images/screenshots/2_511231cc.jpg" alt="截图2" loading="lazy"><div class="slide-caption"><div><div class="s-name">风景如画</div><div class="s-desc">纤毫毕现的极致画质，还原真实的武侠世界。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/screenshots/3_3c9809be.jpg"><img src="assets/images/screenshots/3_3c9809be.jpg" alt="截图3" loading="lazy"><div class="slide-caption"><div><div class="s-name">月下江湖</div><div class="s-desc">月照千里的燕云大地，每一处风景皆是壁纸。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/screenshots/4_84052b1b.jpg"><img src="assets/images/screenshots/4_84052b1b.jpg" alt="截图4" loading="lazy"><div class="slide-caption"><div><div class="s-name">大宋风华</div><div class="s-desc">沉浸式体验千年前的东方武侠开放世界。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/screenshots/5_b7b72f3f.jpg"><img src="assets/images/screenshots/5_b7b72f3f.jpg" alt="截图5" loading="lazy"><div class="slide-caption"><div><div class="s-name">侠客行</div><div class="s-desc">刀光剑影中感受东方武学的独特魅力。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/screenshots/6_05e86dbf.jpg"><img src="assets/images/screenshots/6_05e86dbf.jpg" alt="截图6" loading="lazy"><div class="slide-caption"><div><div class="s-name">山河远阔</div><div class="s-desc">从塞外凉州到江南清河，壮丽的燕云山河。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/1_c5984a3f.jpg"><img src="assets/images/screenshots/1_c5984a3f.jpg" alt="截图1" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">江湖纪行</div><div class="s-desc">燕云世界中的精彩瞬间，记录每一段难忘的江湖旅程。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/2_511231cc.jpg"><img src="assets/images/screenshots/2_511231cc.jpg" alt="截图2" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">风景如画</div><div class="s-desc">纤毫毕现的极致画质，还原真实的武侠世界。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/3_3c9809be.jpg"><img src="assets/images/screenshots/3_3c9809be.jpg" alt="截图3" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">月下江湖</div><div class="s-desc">月照千里的燕云大地，每一处风景皆是壁纸。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/4_84052b1b.jpg"><img src="assets/images/screenshots/4_84052b1b.jpg" alt="截图4" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">大宋风华</div><div class="s-desc">沉浸式体验千年前的东方武侠开放世界。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/5_b7b72f3f.jpg"><img src="assets/images/screenshots/5_b7b72f3f.jpg" alt="截图5" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">侠客行</div><div class="s-desc">刀光剑影中感受东方武学的独特魅力。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/screenshots/6_05e86dbf.jpg"><img src="assets/images/screenshots/6_05e86dbf.jpg" alt="截图6" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">山河远阔</div><div class="s-desc">从塞外凉州到江南清河，壮丽的燕云山河。</div></div></div></div>
       </div>
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
       <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1228,12 +1228,12 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   <div class="tab-panel" id="tab-scenery-wallpapers">
     <div class="carousel reveal" data-carousel>
       <div class="carousel-track">
-        <div class="carousel-slide" data-full="assets/images/wallpapers/1_8cb6e7a0.jpg"><img src="assets/images/wallpapers/1_8cb6e7a0.jpg" alt="壁纸1" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 壹</div><div class="s-desc">官方高清壁纸，展现燕云十六声的极致美学。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/wallpapers/3_0321c623.jpg"><img src="assets/images/wallpapers/3_0321c623.jpg" alt="壁纸2" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 贰</div><div class="s-desc">每一幅都是精雕细琢的艺术品。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/wallpapers/4_59953119.jpg"><img src="assets/images/wallpapers/4_59953119.jpg" alt="壁纸3" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 叁</div><div class="s-desc">沉浸东方美学，感受千年武侠文化。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/wallpapers/5_233e32b7.jpg"><img src="assets/images/wallpapers/5_233e32b7.jpg" alt="壁纸4" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 肆</div><div class="s-desc">以月为名，聚天下豪杰。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/wallpapers/8_94ea5638.jpg"><img src="assets/images/wallpapers/8_94ea5638.jpg" alt="壁纸5" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 伍</div><div class="s-desc">江湖路远，月城为家。</div></div></div></div>
-        <div class="carousel-slide" data-full="assets/images/wallpapers/9_82bf8ec0.jpg"><img src="assets/images/wallpapers/9_82bf8ec0.jpg" alt="壁纸6" loading="lazy"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 陆</div><div class="s-desc">燕云十六声，东方武侠的终极呈现。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/1_8cb6e7a0.jpg"><img src="assets/images/wallpapers/1_8cb6e7a0.jpg" alt="壁纸1" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 壹</div><div class="s-desc">官方高清壁纸，展现燕云十六声的极致美学。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/3_0321c623.jpg"><img src="assets/images/wallpapers/3_0321c623.jpg" alt="壁纸2" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 贰</div><div class="s-desc">每一幅都是精雕细琢的艺术品。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/4_59953119.jpg"><img src="assets/images/wallpapers/4_59953119.jpg" alt="壁纸3" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 叁</div><div class="s-desc">沉浸东方美学，感受千年武侠文化。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/5_233e32b7.jpg"><img src="assets/images/wallpapers/5_233e32b7.jpg" alt="壁纸4" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 肆</div><div class="s-desc">以月为名，聚天下豪杰。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/8_94ea5638.jpg"><img src="assets/images/wallpapers/8_94ea5638.jpg" alt="壁纸5" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 伍</div><div class="s-desc">江湖路远，月城为家。</div></div></div></div>
+        <div class="carousel-slide" data-full="assets/images/wallpapers/9_82bf8ec0.jpg"><img src="assets/images/wallpapers/9_82bf8ec0.jpg" alt="壁纸6" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">燕云壁纸 · 陆</div><div class="s-desc">燕云十六声，东方武侠的终极呈现。</div></div></div></div>
       </div>
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
       <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -1254,12 +1254,12 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 
   <div class="carousel reveal" data-carousel>
     <div class="carousel-track">
-      <div class="carousel-slide" data-full="assets/images/concept-art/1_c8216454.jpg"><img src="assets/images/concept-art/1_c8216454.jpg" alt="原画1" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 壹</div><div class="s-desc">燕云十六声角色与场景概念设计。</div></div></div></div>
-      <div class="carousel-slide" data-full="assets/images/concept-art/2_01fbf3fe.jpg"><img src="assets/images/concept-art/2_01fbf3fe.jpg" alt="原画2" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 贰</div><div class="s-desc">雕梁画栋，精雕细琢的场景原画。</div></div></div></div>
-      <div class="carousel-slide" data-full="assets/images/concept-art/3_085d1f4e.jpg"><img src="assets/images/concept-art/3_085d1f4e.jpg" alt="原画3" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 叁</div><div class="s-desc">东方武侠美学的极致呈现。</div></div></div></div>
-      <div class="carousel-slide" data-full="assets/images/concept-art/4_8201d21f.jpg"><img src="assets/images/concept-art/4_8201d21f.jpg" alt="原画4" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 肆</div><div class="s-desc">江湖万象，尽在笔触之间。</div></div></div></div>
-      <div class="carousel-slide" data-full="assets/images/concept-art/5_c98fea91.jpg"><img src="assets/images/concept-art/5_c98fea91.jpg" alt="原画5" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 伍</div><div class="s-desc">一笔一划勾勒出千年前的江湖。</div></div></div></div>
-      <div class="carousel-slide" data-full="assets/images/concept-art/6_eee67ae4.jpg"><img src="assets/images/concept-art/6_eee67ae4.jpg" alt="原画6" loading="lazy"><div class="slide-caption"><div><div class="s-name">原画设定 · 陆</div><div class="s-desc">角色设计原画，展现独特东方美学。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/1_c8216454.jpg"><img src="assets/images/concept-art/1_c8216454.jpg" alt="原画1" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">原画设定 · 壹</div><div class="s-desc">燕云十六声角色与场景概念设计。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/2_01fbf3fe.jpg"><img src="assets/images/concept-art/2_01fbf3fe.jpg" alt="原画2" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">原画设定 · 贰</div><div class="s-desc">雕梁画栋，精雕细琢的场景原画。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/3_085d1f4e.jpg"><img src="assets/images/concept-art/3_085d1f4e.jpg" alt="原画3" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">原画设定 · 叁</div><div class="s-desc">东方武侠美学的极致呈现。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/4_8201d21f.jpg"><img src="assets/images/concept-art/4_8201d21f.jpg" alt="原画4" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">原画设定 · 肆</div><div class="s-desc">江湖万象，尽在笔触之间。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/5_c98fea91.jpg"><img src="assets/images/concept-art/5_c98fea91.jpg" alt="原画5" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">原画设定 · 伍</div><div class="s-desc">一笔一划勾勒出千年前的江湖。</div></div></div></div>
+      <div class="carousel-slide" data-full="assets/images/concept-art/6_eee67ae4.jpg"><img src="assets/images/concept-art/6_eee67ae4.jpg" alt="原画6" loading="lazy" decoding="async"><div class="slide-caption"><div><div class="s-name">原画设定 · 陆</div><div class="s-desc">角色设计原画，展现独特东方美学。</div></div></div></div>
     </div>
     <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
