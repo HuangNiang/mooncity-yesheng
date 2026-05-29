@@ -1625,7 +1625,7 @@ function closeSplash(){
 
 function startSplashVideo(){
   try{
-    splashVideo.currentTime=0;
+    splashVideo.currentTime=4;
     var playPromise=splashVideo.play();
     if(playPromise!==undefined){
       playPromise.catch(function(){
@@ -1645,7 +1645,7 @@ function startSplashVideo(){
       });
     }
   }catch(e){
-    splashVideo.currentTime=0;
+    splashVideo.currentTime=4;
   }
 }
 
