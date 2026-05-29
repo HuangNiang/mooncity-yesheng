@@ -10,6 +10,7 @@
 <link rel="preload" as="image" href="assets/images/游戏图标.png" fetchpriority="low" type="image/png">
 <link rel="preload" as="image" href="assets/images/hero-bg.jpg" fetchpriority="low">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&display=swap');
 
 /* ============================================================
    VARIABLES — 暗夜水墨色系
@@ -46,7 +47,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;
+  font-family:'Noto Sans SC',sans-serif;
   background:transparent;
   color:var(--ink-body);
   line-height:1.8;
@@ -163,7 +164,7 @@ nav .nav-links a:hover{color:var(--gold)}
 .hero-content{position:relative;z-index:1}
 
 .hero h1{
-  font-family:'STSong','SimSun','Songti SC',serif;
+  font-family:'Noto Serif SC',serif;
   font-size:clamp(3.5rem,8vw,6rem);font-weight:900;
   background:linear-gradient(180deg,var(--ink) 10%,var(--gold-light) 55%,var(--vermillion) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -180,7 +181,7 @@ nav .nav-links a:hover{color:var(--gold)}
 .hero .divider .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--vermillion),transparent)}
 .hero .divider .dot{width:4px;height:4px;background:var(--vermillion);border-radius:50%;opacity:.55}
 .hero .slogan{
-  font-family:'STSong','SimSun','Songti SC',serif;
+  font-family:'Noto Serif SC',serif;
   font-size:1rem;color:var(--ink-dim);line-height:2.2;letter-spacing:.1em;
 }
 .hero .tags{
@@ -249,7 +250,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
    ============================================================ */
 .tabs-nav{display:flex;justify-content:center;gap:.4rem;margin-bottom:2.5rem;flex-wrap:wrap}
 .tabs-nav button{
-  font-family:'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;
+  font-family:'Noto Sans SC',sans-serif;
   padding:.45em 1.3em;font-size:.78rem;
   background:rgba(17,17,24,.45);border:1px solid var(--border);color:var(--ink-dim);
   border-radius:2px;cursor:pointer;transition:all .35s;letter-spacing:.06em;
@@ -678,7 +679,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
 	}
 	.roster-art .art-main{
 	  writing-mode:vertical-rl;
-	  font-family:'KaiTi','STKaiti','Songti SC',cursive;
+	  font-family:'Ma Shan Zheng','Noto Serif SC',cursive;
 	  font-size:2.6rem;font-weight:400;
 	  color:transparent;
 	  background:linear-gradient(170deg,var(--gold-light) 0%,var(--gold) 40%,var(--vermillion-l) 100%);
@@ -689,7 +690,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
 	}
 	.roster-art .art-sub{
 	  writing-mode:vertical-rl;
-	  font-family:'STSong','SimSun','Songti SC',serif;
+	  font-family:'Noto Serif SC',serif;
 	  font-size:.82rem;font-weight:300;
 	  color:var(--ink-dim);
 	  letter-spacing:.3em;
@@ -711,7 +712,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
   opacity:var(--op,1);
   will-change:transform,opacity;
   transition:box-shadow .5s,border-color .5s;
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
 }
 .member-card:not(:first-child){margin-top:-40px}
 .member-card:hover{
@@ -742,7 +743,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
 }
 .member-card .m-name{
   color:var(--ink);font-weight:700;font-size:1.15rem;
-  letter-spacing:.08em;font-family:'STSong','SimSun','Songti SC',serif;
+  letter-spacing:.08em;font-family:'Noto Serif SC',serif;
 }
 .member-card .m-title{font-size:.74rem;color:var(--ink-dim);margin-top:.1rem}
 .member-card .m-motto{font-size:.7rem;color:var(--ink-faint);margin-top:.25rem;opacity:.6;line-height:1.6;max-width:340px}
@@ -773,7 +774,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
 #join .join-card{
   background:var(--bg-card);border:1px solid rgba(192,72,66,.08);
   border-radius:8px;padding:3rem 2rem;max-width:580px;margin:0 auto;
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
 }
 #join .join-card p{color:var(--ink-body);line-height:2.2;margin-bottom:.8rem;font-size:.9rem}
 #join .req-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin:1.2rem 0 1.8rem}
@@ -833,8 +834,8 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 /* ============================================================
    SCROLL REVEAL
    ============================================================ */
-.reveal{opacity:0;transition:opacity .8s}
-.reveal.visible{opacity:1}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
 /* ============================================================
    RESPONSIVE
@@ -860,10 +861,8 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-sub{font-size:.7rem}
   .roster-art .art-line{height:30px}
   .roster-grid{padding:.5rem 0 1.5rem}
-  .member-card{width:72%;transform:translateX(0) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
-  .member-card:hover{transform:translateX(0) rotateX(0deg) scale(1.04) !important}
+    .member-card{width:72%}
   .member-card:not(:first-child){margin-top:-30px}
-  .member-card .video-wrap{aspect-ratio:16/9}
   .member-card .video-overlay{padding:1.6rem 1rem 1rem}
   .member-card .m-name{font-size:1rem}
   .member-card .role-tag{font-size:.58rem}
@@ -883,10 +882,8 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-sub{writing-mode:horizontal-tb;font-size:.7rem;letter-spacing:.15em}
   .roster-art .art-line{width:30px;height:1px}
   .roster-art .art-dot{width:3px;height:3px}
-  .member-card{width:88%;transform:translateX(0) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
-  .member-card:hover{transform:translateX(0) rotateX(0deg) scale(1.04) !important}
+  .member-card{width:88%}
   .member-card:not(:first-child){margin-top:-20px}
-  .member-card .video-wrap{aspect-ratio:3/2}
   .member-card .m-name{font-size:.9rem}
   .member-card .video-overlay{padding:1.2rem .7rem .6rem}
   .member-card .role-tag{font-size:.56rem}
@@ -1481,6 +1478,12 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
     <div class="member-card reveal">
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774189442.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
+        <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
+      </div>
+    </div>
+    <div class="member-card reveal">
+      <div class="video-wrap">
+        <video src="assets/videos/members/hailuo_1774191168.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
