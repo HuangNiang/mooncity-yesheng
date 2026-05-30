@@ -233,14 +233,13 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
 #about .about-text .highlight{color:var(--gold-light);font-weight:500}
 
 #about .about-visual{
-  background:var(--bg-card);border:1px solid rgba(192,72,66,.06);
-  border-radius:6px;padding:2rem;text-align:center;position:relative;overflow:hidden;
-  backdrop-filter:blur(12px);
+  position:relative;overflow:hidden;
+  width:432px;aspect-ratio:5/6;
 }
 #about .about-visual::before{
   content:'';position:absolute;inset:0;
-  background:url('assets/images/kaifeng-palace.jpg') center/cover no-repeat;
-  opacity:.1;
+  background:url('assets/images/kaifeng-palace.jpg') center/contain no-repeat;
+  opacity:1;
 }
 #about .stats-row{display:flex;justify-content:center;gap:3rem;margin-top:2.5rem;flex-wrap:wrap}
 #about .stat-item{text-align:center}
@@ -697,17 +696,22 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
   box-shadow:var(--shadow-sm);
   position:relative;
   transform:translateX(-16.6667%) rotateX(var(--rx,0deg)) scale(var(--sc,1));
-  opacity:var(--op,1);
-  will-change:transform,opacity;
+  opacity:1;
+  will-change:transform;
   transition:box-shadow .5s,border-color .5s;
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
 }
 .member-card:not(:first-child){margin-top:-40px}
 .member-card:hover{
-  box-shadow:var(--shadow-lg),0 0 40px rgba(192,72,66,.1);
-  border-color:var(--border-active);
+  box-shadow:var(--shadow-lg),0 0 60px rgba(192,72,66,.12),0 0 120px rgba(184,148,74,.05);
+  border-color:rgba(184,148,74,.3);
   z-index:100 !important;
-  transform:translateX(-16.6667%) rotateX(0deg) scale(1.04) !important;
+  transform:translateX(-16.6667%) rotateX(0deg) scale(1.05) !important;
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .5s,border-color .5s;
+}
+.member-card:active{
+  transform:translateX(-16.6667%) rotateX(0deg) scale(1.02) !important;
+  transition:transform .08s;
 }
 .member-card .video-wrap{
   position:relative;aspect-ratio:2.55/1;overflow:hidden;
@@ -824,7 +828,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
    ============================================================ */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.member-card.reveal,.member-card.reveal.visible{opacity:var(--op,1);transform:translateX(-16.6667%) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
+.member-card.reveal,.member-card.reveal.visible{opacity:1;transform:translateX(-16.6667%) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
 
 /* ============================================================
    RESPONSIVE
@@ -852,9 +856,10 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-dot{width:3px;height:3px}
   .roster-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding:.5rem 6vw 1.5rem;scrollbar-width:none;-ms-overflow-style:none}
   .roster-grid::-webkit-scrollbar{display:none}
-  .member-card{flex:0 0 80vw;scroll-snap-align:center;width:80vw;margin:0;transform:none;opacity:1;backdrop-filter:none;-webkit-backdrop-filter:none;will-change:auto;background:rgba(14,14,22,.88);border:1px solid rgba(184,148,74,.15);border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+  .member-card{flex:0 0 80vw;scroll-snap-align:center;width:80vw;margin:0;transform:none;opacity:1;backdrop-filter:none;-webkit-backdrop-filter:none;will-change:auto;background:rgba(14,14,22,.88);border:1px solid rgba(184,148,74,.15);border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);transition:box-shadow .35s,border-color .35s,transform .25s}
   .member-card:not(:first-child){margin-top:0}
   .member-card:hover{transform:none!important}
+  .member-card:active{transform:scale(.97)!important;box-shadow:0 4px 16px rgba(0,0,0,.5)}
   .member-card .video-wrap{aspect-ratio:16/9;border-radius:0}
   .member-card .video-overlay{position:relative;padding:.7rem .85rem .8rem;background:transparent;align-items:flex-start;text-align:left;pointer-events:auto}
   .member-card .m-name{font-size:.9rem}
@@ -878,9 +883,10 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-dot{width:3px;height:3px}
   .roster-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding:.4rem 5vw 1.2rem;scrollbar-width:none;-ms-overflow-style:none}
   .roster-grid::-webkit-scrollbar{display:none}
-  .member-card{flex:0 0 84vw;scroll-snap-align:center;width:84vw;margin:0;transform:none;opacity:1;backdrop-filter:none;-webkit-backdrop-filter:none;will-change:auto;background:rgba(14,14,22,.88);border:1px solid rgba(184,148,74,.15);border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+  .member-card{flex:0 0 84vw;scroll-snap-align:center;width:84vw;margin:0;transform:none;opacity:1;backdrop-filter:none;-webkit-backdrop-filter:none;will-change:auto;background:rgba(14,14,22,.88);border:1px solid rgba(184,148,74,.15);border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);transition:box-shadow .35s,border-color .35s,transform .25s}
   .member-card:not(:first-child){margin-top:0}
   .member-card:hover{transform:none!important}
+  .member-card:active{transform:scale(.97)!important;box-shadow:0 4px 16px rgba(0,0,0,.5)}
   .member-card .video-wrap{aspect-ratio:16/9;border-radius:0}
   .member-card .video-overlay{position:relative;padding:.6rem .75rem .7rem;background:transparent;align-items:flex-start;text-align:left;pointer-events:auto}
   .member-card .m-name{font-size:.85rem}
@@ -965,23 +971,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
       <p>我们秉持<span class="highlight">"月照千里，城纳百川"</span>的理念，无论你是初入燕云的<span class="highlight">新秀</span>，还是身经百战的<span class="highlight">高手</span>，这里都有属于你的一席之地。</p>
       <p>百业方向涵盖养生、探索、休闲，定期举办月下论剑、城池共建、江湖探索队等丰富活动，让每一位成员都能找到属于自己的江湖节奏。</p>
     </div>
-    <div class="about-visual">
-      <svg viewBox="0 0 200 240" style="width:180px;opacity:.6">
-        <defs>
-          <radialGradient id="mG"><stop offset="0%" stop-color="#fffef5"/><stop offset="100%" stop-color="#c8b080"/></radialGradient>
-          <linearGradient id="tG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1714"/><stop offset="100%" stop-color="#2a2724"/></linearGradient>
-        </defs>
-        <circle cx="100" cy="80" r="55" fill="url(#mG)" opacity=".85"/>
-        <circle cx="100" cy="80" r="55" fill="none" stroke="rgba(192,72,66,.1)" stroke-width=".5"/>
-        <rect x="55" y="130" width="90" height="75" fill="url(#tG)" rx="4" opacity=".6"/>
-        <rect x="65" y="140" width="20" height="16" fill="rgba(232,228,220,.08)" rx="1"/>
-        <rect x="92" y="140" width="20" height="16" fill="rgba(232,228,220,.08)" rx="1"/>
-        <rect x="65" y="162" width="18" height="14" fill="rgba(232,228,220,.05)" rx="1"/>
-        <rect x="88" y="162" width="18" height="14" fill="rgba(232,228,220,.05)" rx="1"/>
-        <rect x="111" y="162" width="18" height="14" fill="rgba(232,228,220,.05)" rx="1"/>
-        <text x="100" y="225" text-anchor="middle" fill="#706c64" font-size="10" font-family="serif">月 亮 城</text>
-      </svg>
-    </div>
+    <div class="about-visual"></div>
   </div>
 
   <div class="stats-row reveal">
@@ -1412,73 +1402,73 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
         <div class="art-line"></div>
       </div>
     <div class="roster-grid">
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/clip4fadb73c-f433-4eae-83ec-201f7ce3318b.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">月照千里，城纳百川</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/clip60947939-4cae-4c81-b1e6-e53a1274b73a.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">共筑共建，月城为家</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/clip9d067557-648e-44f2-8c58-59dae9f1b3c5.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">众志凌霄，战无不克</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/dreamina_7618917708058397979_1773917755749_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">兵马未动，粮草先行</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/dreamina_7619176539778780466_1773977883306_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">纵横捭阖，以礼会友</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/dreamina_7619775022365822218_1774117189653_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">剑指凌霄，舍我其谁</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774120045.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/1.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline style="object-position:top"></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774120886.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774186445.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774189442.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card">
+    <div class="member-card" data-video-card>
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774194492.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
