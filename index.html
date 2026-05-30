@@ -1848,9 +1848,10 @@ document.querySelectorAll('[data-video-card]').forEach(card=>{
   const video=card.querySelector('video');
   if(!video)return;
 
-  // Click: fullscreen + unmute
+  // Click: fullscreen + unmute + pause bg music
   const goFullscreen=()=>{
     video.muted=false;
+    if(musicPlaying){bgMusic.pause();musicPlaying=false;musicToggle.classList.add('muted')}
     if(video.requestFullscreen){
       video.requestFullscreen().catch(()=>{
         video.muted=true;
@@ -1863,8 +1864,13 @@ document.querySelectorAll('[data-video-card]').forEach(card=>{
   card.querySelector('.video-wrap').addEventListener('click',goFullscreen);
   video.addEventListener('click',goFullscreen);
 
-  // When exiting fullscreen, re-mute
-  const reMute=()=>{if(!document.fullscreenElement&&!document.webkitFullscreenElement)video.muted=true};
+  // When exiting fullscreen, re-mute + resume bg music
+  const reMute=()=>{
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement){
+      video.muted=true;
+      if(!musicPlaying)playMusic();
+    }
+  };
   video.addEventListener('fullscreenchange',reMute);
   video.addEventListener('webkitfullscreenchange',reMute);
 });
