@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月亮城 — 燕云十六声 · 百业</title>
+<meta name="description" content="月亮城 - 燕云十六声百业，以月为名，聚天下豪杰。养生·探索·休闲方向百业招募中。">
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -220,7 +221,7 @@ nav .nav-links a:hover{color:var(--gold)}
    SECTION COMMONS
    ============================================================ */
 .section-wrap{position:relative;z-index:1;perspective:1000px}
-section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto;contain-intrinsic-size:auto 600px}
+section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto;contain-intrinsic-size:600px}
 .section-header{text-align:center;margin-bottom:3rem}
 
 /* ============================================================
@@ -358,9 +359,7 @@ section{max-width:1050px;margin:0 auto;padding:5rem 2rem;content-visibility:auto
   transform:translateY(-4px) scale(1.03);
   box-shadow:var(--shadow-lg),0 0 0 1px rgba(255,255,255,.03) inset;
 }
-.member-card:hover{
-  box-shadow:var(--shadow-lg),0 0 40px rgba(192,72,66,.08),0 1px 0 rgba(255,255,255,.02) inset !important;
-}
+/* .member-card:hover box-shadow moved to roster — avoid !important conflict */
 #join .join-card:hover{
   box-shadow:var(--shadow-lg),0 0 0 1px rgba(255,255,255,.03) inset;
 }
@@ -881,7 +880,6 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-line{width:22px;height:1px}
   .roster-art .art-dot{width:3px;height:3px}
   .roster-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding:.4rem 5vw 1.2rem;scrollbar-width:none;-ms-overflow-style:none}
-  .roster-grid::-webkit-scrollbar{display:none}
   .member-card{flex:0 0 84vw;scroll-snap-align:center;width:84vw;margin:0;transform:none;opacity:1;backdrop-filter:none;-webkit-backdrop-filter:none;will-change:auto;background:rgba(14,14,22,.88);border:1px solid rgba(184,148,74,.15);border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);transition:box-shadow .35s,border-color .35s,transform .25s}
   .member-card:not(:first-child){margin-top:0}
   .member-card:hover{transform:none!important}
@@ -1590,7 +1588,7 @@ let splashDone=false;
 const bgVideo=document.querySelector('.bg-video video');
 function initBgVideo(){
   if(!bgVideo||bgVideo.src)return;
-  var ds=bgVideo.dataset.src;
+  const ds=bgVideo.dataset.src;
   if(ds){bgVideo.src=ds;bgVideo.load()}
 }
 if(!splash||getComputedStyle(splash).display==='none'){
@@ -1612,11 +1610,11 @@ function closeSplash(){
 function startSplashVideo(){
   try{
     splashVideo.currentTime=4;
-    var playPromise=splashVideo.play();
+    const playPromise=splashVideo.play();
     if(playPromise!==undefined){
       playPromise.catch(function(){
         splashVideo.style.opacity='0.3';
-        var hint=document.createElement('div');
+        const hint=document.createElement('div');
         hint.id='tapHint';
         hint.style.cssText='position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:1.1rem;text-align:center;pointer-events:none;z-index:1;text-shadow:0 0 20px rgba(0,0,0,.8)';
         hint.innerHTML='<div style="font-size:2.8rem;margin-bottom:.5rem;animation:pulse 1.5s infinite">▶</div><div>点击屏幕开始</div>';
@@ -1790,10 +1788,13 @@ function initCarousel(el){
     });
   }
 
+  let auto;
+  function startAuto(){clearInterval(auto);auto=setInterval(()=>goTo(idx+1),5000)}
   function goTo(i){
     idx=((i%slides.length)+slides.length)%slides.length;
     track.style.transform=`translateX(-${idx*100}%)`;
     dots.forEach((d,j)=>d.classList.toggle('active',j===idx));
+    startAuto();
   }
 
   prevBtn&&prevBtn.addEventListener('click',e=>{e.stopPropagation();goTo(idx-1)});
@@ -1816,16 +1817,15 @@ function initCarousel(el){
     });
   });
 
-  let auto=setInterval(()=>goTo(idx+1),5000);
+  startAuto();
   el.addEventListener('mouseenter',()=>clearInterval(auto));
-  el.addEventListener('mouseleave',()=>{clearInterval(auto);auto=setInterval(()=>goTo(idx+1),5000)});
+  el.addEventListener('mouseleave',startAuto);
 }
 // Init all carousels
 document.querySelectorAll('[data-carousel]').forEach(initCarousel);
 
 const lb=document.getElementById('lightbox');
 const lbImg=document.getElementById('lb-img');
-let lbCurrentSlides=[],lbIdx=0;
 
 function openLightbox(src){
   lbImg.src=src;
@@ -1857,7 +1857,7 @@ document.querySelectorAll('[data-video-card]').forEach(card=>{
     }
   };
   card.querySelector('.video-wrap').addEventListener('click',goFullscreen);
-  video.addEventListener('click',goFullscreen);
+  video.addEventListener('click',e=>{e.stopPropagation();goFullscreen();});
 
   // fullscreen enter/exit: unmute on enter, re-mute + resume bg music on exit
   const onFullscreenChange=()=>{
@@ -1919,11 +1919,14 @@ document.querySelectorAll('[data-video-card]').forEach(card=>{
 
 (function(){
   const ss=document.querySelectorAll('section[id]'),ls=document.querySelectorAll('.nav-links a');
-  addEventListener('scroll',()=>{
-    let cur='';
-    ss.forEach(s=>{if(scrollY>=s.offsetTop-200)cur=s.id});
+  const navScroll=()=>{
+    let cur='';const viewMid=scrollY+innerHeight*.3;
+    ss.forEach(s=>{const top=s.offsetTop,bot=top+s.offsetHeight;if(viewMid>=top&&viewMid<bot)cur=s.id});
+    if(!cur&&scrollY>100)cur=ss[0]?ss[0].id:'';
     ls.forEach(l=>l.style.color=l.getAttribute('href')==='#'+cur?'var(--gold)':'');
-  });
+  };
+  addEventListener('scroll',navScroll,{passive:true});
+  navScroll();
 })();
 
 (function(){
