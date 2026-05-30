@@ -822,6 +822,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
    ============================================================ */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.member-card.reveal,.member-card.reveal.visible{opacity:var(--op,1);transform:translateX(-16.6667%) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
 
 /* ============================================================
    RESPONSIVE
@@ -847,7 +848,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-sub{font-size:.7rem}
   .roster-art .art-line{height:30px}
   .roster-grid{padding:.5rem 0 1.5rem}
-    .member-card{width:72%}
+    .member-card{width:72%;transform:translateX(-10%) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
   .member-card:not(:first-child){margin-top:-30px}
   .member-card .video-overlay{padding:1.6rem 1rem 1rem}
   .member-card .m-name{font-size:1rem}
@@ -868,7 +869,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
   .roster-art .art-sub{writing-mode:horizontal-tb;font-size:.7rem;letter-spacing:.15em}
   .roster-art .art-line{width:30px;height:1px}
   .roster-art .art-dot{width:3px;height:3px}
-  .member-card{width:88%}
+  .member-card{width:88%;transform:translateX(0) rotateX(var(--rx,0deg)) scale(var(--sc,1))}
   .member-card:not(:first-child){margin-top:-20px}
   .member-card .m-name{font-size:.9rem}
   .member-card .video-overlay{padding:1.2rem .7rem .6rem}
@@ -1399,73 +1400,73 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
         <div class="art-line"></div>
       </div>
     <div class="roster-grid">
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/clip4fadb73c-f433-4eae-83ec-201f7ce3318b.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">月照千里，城纳百川</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/clip60947939-4cae-4c81-b1e6-e53a1274b73a.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">共筑共建，月城为家</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/clip9d067557-648e-44f2-8c58-59dae9f1b3c5.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">众志凌霄，战无不克</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/dreamina_7618917708058397979_1773917755749_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">兵马未动，粮草先行</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/dreamina_7619176539778780466_1773977883306_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">纵横捭阖，以礼会友</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/dreamina_7619775022365822218_1774117189653_m.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div><div class="m-motto">剑指凌霄，舍我其谁</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774120045.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/1.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline style="object-position:top"></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774120886.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774186445.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774189442.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
       </div>
     </div>
-    <div class="member-card reveal">
+    <div class="member-card">
       <div class="video-wrap">
         <video src="assets/videos/members/hailuo_1774194492.mp4" fetchpriority="low" preload="none" autoplay loop muted playsinline></video>
         <div class="video-overlay"><div class="role-tag">精英</div><div class="m-name">虚位以待</div><div class="m-title">战斗骨干</div></div>
