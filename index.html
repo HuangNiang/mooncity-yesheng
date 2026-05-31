@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>月亮城 — 燕云十六声 · 百业</title>
 <meta name="description" content="月亮城 - 燕云十六声百业，以月为名，聚天下豪杰。养生·探索·休闲方向百业招募中。">
+<meta property="og:title" content="月亮城 — 燕云十六声 · 百业">
+<meta property="og:description" content="月亮城 - 燕云十六声百业，以月为名，聚天下豪杰。养生·探索·休闲方向百业招募中。">
+<meta property="og:image" content="assets/images/hero-bg.jpg">
+<meta property="og:url" content="https://yysls.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +57,7 @@
    RESET & BASE
    ============================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
 body{
   font-family:'Noto Sans SC',sans-serif;
   background:transparent;
@@ -63,7 +69,9 @@ body{
     radial-gradient(ellipse at 80% 90%, rgba(106,138,120,.03) 0%, transparent 55%),
     radial-gradient(ellipse at 50% 50%, rgba(180,148,74,.02) 0%, transparent 70%);
   background-attachment:fixed;
+  -webkit-tap-highlight-color:transparent;
 }
+a,button,[role=button],input,select,textarea,label,[tabindex]{touch-action:manipulation}
 /* Splash screen */
 .splash{position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease-out}
 .splash.fade-out{opacity:0;pointer-events:none}
@@ -122,6 +130,7 @@ body{
 nav{
   position:fixed;top:0;left:0;width:100%;z-index:100;
   padding:1rem 2.5rem;
+  transform:translateZ(0);-webkit-transform:translateZ(0);
   display:flex;justify-content:space-between;align-items:center;
   transition:all .4s;
   background:rgba(8,8,15,.35);backdrop-filter:blur(12px);
@@ -833,6 +842,14 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
    ============================================================ */
 @media(max-width:768px){
   .splash{display:none}
+  body{background-attachment:scroll}
+  /* WeChat/X5 backdrop-filter fallback — solid backgrounds */
+  nav{background:rgba(8,8,15,.88);-webkit-backdrop-filter:none;backdrop-filter:none}
+  nav.scrolled{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .sys-card, .martial-card, .faction-card, .activity-card, .platform-card, .video-card, #join .join-card{background:rgba(17,17,24,.82);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .tabs-nav button{background:rgba(17,17,24,.78);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .detail-modal{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .lightbox{-webkit-backdrop-filter:none;backdrop-filter:none}
   nav{padding:.7rem 1.2rem}
   nav.scrolled{padding:.5rem 1.2rem}
   nav .nav-links{gap:.8rem}
@@ -1670,15 +1687,31 @@ const detailModal=document.getElementById('detailModal');
 const dmContent=document.getElementById('dmContent');
 const dmClose=document.getElementById('dmClose');
 
+let _scrollY=0;
+function lockBodyScroll(){
+  _scrollY=window.scrollY;
+  document.body.style.position='fixed';
+  document.body.style.top=`-${_scrollY}px`;
+  document.body.style.width='100%';
+  document.body.style.overflow='hidden';
+}
+function unlockBodyScroll(){
+  document.body.style.position='';
+  document.body.style.top='';
+  document.body.style.width='';
+  document.body.style.overflow='';
+  window.scrollTo(0,_scrollY);
+}
+
 function openDetailModal(html){
   dmContent.innerHTML=html;
   detailModal.classList.add('open');
-  document.body.style.overflow='hidden';
+  lockBodyScroll();
 }
 
 function closeDetailModal(){
   detailModal.classList.remove('open');
-  document.body.style.overflow='';
+  unlockBodyScroll();
 }
 
 dmClose.addEventListener('click',closeDetailModal);
@@ -1832,12 +1865,12 @@ const lbImg=document.getElementById('lb-img');
 function openLightbox(src){
   lbImg.src=src;
   lb.classList.add('open');
-  document.body.style.overflow='hidden';
+  lockBodyScroll();
 }
 
 function closeLightbox(){
   lb.classList.remove('open');
-  document.body.style.overflow='';
+  unlockBodyScroll();
   lbImg.src='';
 }
 
