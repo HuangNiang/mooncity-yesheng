@@ -923,7 +923,7 @@ footer p{font-size:.8rem;color:var(--ink-dim);line-height:2}
 </div>
 
 <div class="bg-video">
-  <video data-src="https://yysls.fp.ps.netease.com/file/66eaa38192ee907e691a2581F9u2jtw505" preload="none" loop muted playsinline webkit-playsinline disableRemotePlayback></video>
+  <video data-src="https://yysls.fp.ps.netease.com/file/66eaa38192ee907e691a2581F9u2jtw505" preload="none" autoplay loop muted playsinline webkit-playsinline disableRemotePlayback></video>
   <div class="bg-video-mask"></div>
 </div>
 
@@ -1596,6 +1596,9 @@ musicToggle.addEventListener('click',toggleMusic);
 ['click','scroll','keydown','touchstart'].forEach(evt=>{
   addEventListener(evt,playMusic,{once:true});
 });
+['click','touchstart'].forEach(evt=>{
+  addEventListener(evt,tryPlayBgVideo,{once:true});
+});
 
 const splash=document.getElementById('splash');
 const splashVideo=document.getElementById('splashVideo');
@@ -1605,10 +1608,16 @@ const soundBtn=document.getElementById('soundBtn');
 let splashDone=false;
 
 const bgVideo=document.querySelector('.bg-video video');
+let bgVideoReady=false;
 function initBgVideo(){
   if(!bgVideo||bgVideo.src)return;
   const ds=bgVideo.dataset.src;
-  if(ds){bgVideo.src=ds;bgVideo.load()}
+  if(ds){bgVideo.src=ds;bgVideo.load();bgVideoReady=true}
+  tryPlayBgVideo();
+}
+function tryPlayBgVideo(){
+  if(!bgVideo||!bgVideoReady||bgVideo.src===undefined)return;
+  bgVideo.play().catch(()=>{});
 }
 if(!splash||getComputedStyle(splash).display==='none'){
   splashDone=true;
