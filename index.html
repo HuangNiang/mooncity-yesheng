@@ -1613,11 +1613,14 @@ let bgVideoReady=false;
 function initBgVideo(){
   if(!bgVideo||bgVideo.src)return;
   const ds=bgVideo.dataset.src;
-  if(ds){bgVideo.src=ds;bgVideo.load();bgVideoReady=true}
-  tryPlayBgVideo();
+  if(!ds)return;
+  bgVideoReady=true;
+  bgVideo.addEventListener('canplay',tryPlayBgVideo,{once:true});
+  bgVideo.src=ds;
+  bgVideo.load();
 }
 function tryPlayBgVideo(){
-  if(!bgVideo||!bgVideoReady||bgVideo.src===undefined)return;
+  if(!bgVideo||!bgVideoReady)return;
   bgVideo.play().catch(()=>{});
 }
 if(!splash||getComputedStyle(splash).display==='none'){
